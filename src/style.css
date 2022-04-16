@@ -1,12 +1,12 @@
 body {
-    margin: 0;
+    max-width: 50rem;
+    height: 100vh;
+    margin: 0 auto;
     background-color: aliceblue;
     font-family: 'Lato', sans-serif;
 }
 
 .container {
-    max-width: 50rem;
-    margin: 0 auto;
     padding: 1em;
     box-shadow: 0px 0px 50px -20px rgba(0,0,0,0.75);
 }
@@ -14,6 +14,7 @@ body {
 header {
     display: flex;
     align-items: center;
+    position: fixed;
     background-color: transparent;
 }
 
@@ -42,7 +43,24 @@ header {
 }
 
 .nav-link {
-    color: black;
+    color: white;
     font-size: 1.2rem;
     text-decoration: none;
+}
+
+.intro-section {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    min-height: 25rem;
+    background-color: rgb(23, 25, 129);
+    background-image: url(img/nasa-Q1p7bh3SHj8-unsplash.jpg);
+    background-size: cover;
+}
+
+h1 {
+    max-width: 60%;
+    margin-right: .5em;
+    color: white;
+    font-size: 3rem;
 }
