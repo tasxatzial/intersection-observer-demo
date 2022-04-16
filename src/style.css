@@ -50,8 +50,9 @@ header {
 
 .intro-section {
     display: flex;
-    justify-content: right;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
     min-height: 30rem;
     background-color: rgb(23, 25, 129);
     background-image: url(img/nasa-Q1p7bh3SHj8-unsplash.jpg);
@@ -60,7 +61,7 @@ header {
 
 h1 {
     max-width: 60%;
-    margin-right: .5em;
+    margin: 0 .5em 0 0;
     color: white;
     font-size: 3rem;
 }
