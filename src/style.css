@@ -42,10 +42,15 @@ header {
 }
 
 .nav-link {
-    padding: .5rem;
+    padding-bottom: .5em;
     color: white;
     font-size: 1.2rem;
     text-decoration: none;
+}
+
+.nav-link:focus,
+.nav-link:hover {
+    border-bottom: 2px solid white;
 }
 
 .intro-section {
