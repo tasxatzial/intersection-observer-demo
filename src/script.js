@@ -1,9 +1,9 @@
 const header = document.querySelector('header');
-const introObserved = document.querySelector('h1');
+const h1 = document.querySelector('h1');
 const introSection = document.getElementById('intro');
 const navList = document.querySelector('.nav-list');
 
-function intersectionObserverFn(entries, introObserver) {
+function changeHeader(entries, introObserver) {
     for (let entry of entries) {
         if (!entry.isIntersecting) {
             header.classList.add('scrolled');
@@ -13,19 +13,19 @@ function intersectionObserverFn(entries, introObserver) {
     }
 }
 
-let introObserver = null;
+let h1_IO = null;
 
-const headerResizeObserver = new ResizeObserver(entries => {
+const navList_RO = new ResizeObserver(entries => {
     for (let entry of entries) {
-        if (introObserver) {
-            introObserver.unobserve(header);
+        if (h1_IO) {
+            h1_IO.unobserve(header);
         }
         const headerHeight = header.getBoundingClientRect().height; 
         const introSectionHeight = introSection.getBoundingClientRect().height;
         const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px ' + introSectionHeight + 'px 0px'};
-        introObserver = new IntersectionObserver(intersectionObserverFn, options);
-        introObserver.observe(introObserved);
+        h1_IO = new IntersectionObserver(changeHeader, options);
+        h1_IO.observe(h1);
     }
 })
 
-headerResizeObserver.observe(navList);
+navList_RO.observe(navList);
