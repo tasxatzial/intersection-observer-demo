@@ -28,6 +28,10 @@ h1 {
     font-size: 3rem;
 }
 
+h2 {
+    text-align: center;
+}
+
 /*===================== IMAGE =====================*/
 
 .logo-link img {
@@ -107,4 +111,12 @@ header {
     justify-content: center;
     align-items: flex-end;
     height: 100%;
+}
+
+.history-section {
+    background-color: ghostwhite;
+}
+
+.history-section-content > * + * {
+    margin-bottom: 1.5em;
 }
