@@ -29,7 +29,16 @@ h1 {
 }
 
 h2 {
+    margin-bottom: 1.5em;
     text-align: center;
+}
+
+.gallery-item-title {
+    margin: 0;
+}
+
+.gallery-item-text {
+    margin-bottom: 1.5em;
 }
 
 /*===================== IMAGE =====================*/
@@ -39,6 +48,10 @@ h2 {
     height: 100%;
     border: 1px solid black;
     border-radius: 50%;
+}
+
+.gallery-img {
+    width: 100%;
 }
 
 /*===================== LINK =====================*/
@@ -119,4 +132,20 @@ header {
 
 .history-section-content > * + * {
     margin-bottom: 1.5em;
+}
+
+.gallery-content > * + * {
+    margin-bottom: 3em;
+}
+
+.gallery-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gallery-img-container {
+    order: 1;
+    max-width: 80%;
+    align-self: center;
 }
