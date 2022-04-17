@@ -16,15 +16,14 @@ body {
 }
 
 .scrolled > .container {
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
 
 /*===================== TEXT =====================*/
 
 h1 {
     max-width: 60%;
-    margin: 0 .5em 0 0;
     color: white;
     font-size: 3rem;
 }
@@ -43,7 +42,7 @@ h1 {
 .logo-link {
     width: 45px;
     height: 45px;
-    margin-right: 1rem;
+    margin-right: 1em;
 }
 
 .nav-link {
@@ -62,7 +61,7 @@ h1 {
 
 .container {
     max-width: 60rem;
-    padding: 1rem;
+    padding: 1em 2em 1em;
     margin: 0 auto;
 }
 
