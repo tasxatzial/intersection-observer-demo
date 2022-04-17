@@ -18,7 +18,7 @@ let h1_IO = null;
 const navList_RO = new ResizeObserver(entries => {
     for (let entry of entries) {
         if (h1_IO) {
-            h1_IO.unobserve(header);
+            h1_IO.unobserve(h1);
         }
         const headerHeight = header.getBoundingClientRect().height; 
         const introSectionHeight = introSection.getBoundingClientRect().height;
