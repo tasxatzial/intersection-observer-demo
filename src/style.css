@@ -23,13 +23,13 @@ body {
 /*===================== TEXT =====================*/
 
 h1 {
-    max-width: 60%;
+    max-width: 90%;
+    text-align: center;
     color: white;
     font-size: 3rem;
 }
 
 h2 {
-    margin-bottom: 1.5em;
     text-align: center;
 }
 
@@ -44,8 +44,7 @@ h2 {
 /*===================== IMAGE =====================*/
 
 .logo-link img {
-    width: 100%;
-    height: 100%;
+    max-width: 2rem;
     border: 1px solid black;
     border-radius: 50%;
 }
@@ -57,8 +56,6 @@ h2 {
 /*===================== LINK =====================*/
 
 .logo-link {
-    width: 45px;
-    height: 45px;
     margin-right: 1em;
 }
 
@@ -122,7 +119,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     height: 100%;
 }
 
@@ -134,18 +131,39 @@ header {
     margin-bottom: 1.5em;
 }
 
-.gallery-content > * + * {
-    margin-bottom: 3em;
-}
-
 .gallery-item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    margin-top: 3em;
 }
 
 .gallery-img-container {
     order: 1;
     max-width: 80%;
     align-self: center;
+}
+
+@media screen and (min-width: 42em) {
+    h1 {
+        max-width: 60%;
+        text-align: left;
+    }
+
+    .intro-section-content {
+        align-items: flex-end;
+    }
+
+    .gallery-item {
+        flex-direction: row;
+    }
+
+    .gallery-item > * {
+        max-width: 45%;
+    }
+
+    .gallery-img-container {
+        order: initial;
+        align-self: center;
+    }
 }
