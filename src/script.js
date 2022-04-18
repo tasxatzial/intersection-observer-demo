@@ -1,16 +1,8 @@
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const navList = document.querySelector('.nav-list');
-const homeSection = document.getElementById('intro');
-const historySection = document.getElementById('history');
-const gallerySection = document.getElementById('gallery');
-const homeLink = navList.querySelector('[href="#intro"]');
-const historyLink = navList.querySelector('[href="#history"');
-const galleryLink = navList.querySelector('[href="#gallery"');
+const sections = document.querySelectorAll('section');
 const galleryItems = document.querySelectorAll('.gallery-item');
-
-let h1_IO = null;
-let currentLink = null;
 
 function changeHeader(entries, observer) {
     for (let entry of entries) {
@@ -25,20 +17,13 @@ function changeHeader(entries, observer) {
 function underlineCurrentLink(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
-            let id = entry.target.getAttribute('id');
-            if (currentLink != null) {
-                currentLink.classList.remove('current-link');
+            let id = entry.target.id;
+            let currentUnderlined = navList.querySelector('.current-link');
+            let newUnderlined = navList.querySelector('[href="#' + id + '"]');
+            if (currentUnderlined) {
+                currentUnderlined.classList.remove('current-link');
             }
-            if (id === 'intro') {
-                homeLink.classList.add('current-link');
-                currentLink = homeLink;
-            } else if (id === 'history') {
-                historyLink.classList.add('current-link');
-                currentLink = historyLink;
-            } else {
-                galleryLink.classList.add('current-link');
-                currentLink = galleryLink;
-            }
+            newUnderlined.classList.add('current-link');
         }
     }
 }
@@ -54,33 +39,30 @@ function loadImg(entries, observer) {
 }
 
 (function() {
-    const navList_RO = new ResizeObserver(entries => {
-        for (let entry of entries) {
-            if (h1_IO) {
-                h1_IO.unobserve(h1);
-            }
-            const headerHeight = header.getBoundingClientRect().height;
-            const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px 0px 0px'};
-            h1_IO = new IntersectionObserver(changeHeader, options);
-            h1_IO.observe(h1);
-        }
-    });
+    let io = null;
+    const navList_RO = new ResizeObserver(create_h1_IO);
     navList_RO.observe(navList);
-})();
 
-(function() {
-    const sections_IO_options = {
-        rootMargin: '-50% 0px -50% 0px'
+    function create_h1_IO(entries) {
+        if (io) {
+            io.unobserve(h1);
+        }
+        const headerHeight = header.getBoundingClientRect().height;
+        const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px 0px 0px'};
+        io = new IntersectionObserver(changeHeader, options);
+        io.observe(h1);
     }
-    const sections_IO = new IntersectionObserver(underlineCurrentLink, sections_IO_options);
-    sections_IO.observe(homeSection)
-    sections_IO.observe(historySection)
-    sections_IO.observe(gallerySection)
 })();
 
 (function() {
-    const galleryItem_IO = new IntersectionObserver(loadImg, {});
-    galleryItems.forEach(item => {
-        galleryItem_IO.observe(item);
-    });
+    const options = {
+        rootMargin: '-50% 0px -50% 0px'
+    };
+    const io = new IntersectionObserver(underlineCurrentLink, options);
+    sections.forEach(x => io.observe(x));
+})();
+
+(function() {
+    const io = new IntersectionObserver(loadImg, {});
+    galleryItems.forEach(x => io.observe(x));
 })();
