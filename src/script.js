@@ -7,6 +7,7 @@ const gallerySection = document.getElementById('gallery');
 const homeLink = navList.querySelector('[href="#intro"]');
 const historyLink = navList.querySelector('[href="#history"');
 const galleryLink = navList.querySelector('[href="#gallery"');
+const galleryItems = document.querySelectorAll('.gallery-item');
 
 let h1_IO = null;
 let currentLink = null;
@@ -42,6 +43,16 @@ function underlineCurrentLink(entries, observer) {
     }
 }
 
+function loadImg(entries, observer) {
+    for (let entry of entries) {
+        if (entry.isIntersecting) {
+            let img = entry.target.querySelector('img');
+            img.src = img.getAttribute('data-src');
+            observer.unobserve(entry.target);
+        }
+    }
+}
+
 (function() {
     const navList_RO = new ResizeObserver(entries => {
         for (let entry of entries) {
@@ -65,4 +76,11 @@ function underlineCurrentLink(entries, observer) {
     sections_IO.observe(homeSection)
     sections_IO.observe(historySection)
     sections_IO.observe(gallerySection)
+})();
+
+(function() {
+    const galleryItem_IO = new IntersectionObserver(loadImg, {});
+    galleryItems.forEach(item => {
+        galleryItem_IO.observe(item);
+    });
 })();
