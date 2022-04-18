@@ -82,7 +82,11 @@ p {
 
 .nav-link:focus,
 .nav-link:hover {
-    border-bottom: 2px solid mediumaquamarine;
+    color: mediumaquamarine;
+}
+
+.current-link {
+    border-bottom: 3px solid mediumaquamarine;
 }
 
 /*===================== CONTAINER =====================*/
