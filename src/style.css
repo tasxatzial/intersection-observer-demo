@@ -46,11 +46,11 @@ p {
     line-height: 1.4;
 }
 
-.gallery-item-title {
+.planet-title {
     margin: 0;
 }
 
-.gallery-item-text {
+.planet-info {
     margin-bottom: 1.5em;
 }
 
@@ -96,13 +96,9 @@ p {
     margin: 0 auto;
 }
 
-.header-container {
-    padding: 1em;
-}
-
-.intro-container,
-.history-container,
-.gallery-container {
+.intro-content,
+.history-content,
+.gallery-content {
     padding: 1em 1em 2em;
 }
 
@@ -117,6 +113,7 @@ header {
 .header-content {
     display: flex;
     align-items: center;
+    padding: 1em;
     transition: padding 400ms;
 }
 
@@ -138,7 +135,7 @@ header {
     background-size: cover;
 }
 
-.intro-section-content {
+.intro-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -150,7 +147,7 @@ header {
     background-color: ghostwhite;
 }
 
-.history-section-content > * + * {
+.history-content > * + * {
     margin-bottom: 1.5em;
 }
 
@@ -164,8 +161,7 @@ header {
     margin-bottom: 3em;
 }
 
-.gallery-img-container {
-    order: 1;
+.planet-img-container {
     max-width: 80%;
     align-self: center;
 }
@@ -181,17 +177,17 @@ header {
         text-align: left;
     }
 
-    .header-container {
+    .header-content {
         padding: 1em 2em 1em;
     }
     
-    .intro-container,
-    .history-container,
-    .gallery-container {
+    .intro-content,
+    .history-content,
+    .gallery-content {
         padding: 1em 2em 2em;
     }
 
-    .intro-section-content {
+    .intro-content {
         align-items: flex-end;
     }
 
@@ -203,8 +199,7 @@ header {
         max-width: 45%;
     }
 
-    .gallery-img-container {
-        order: initial;
+    .planet-img-container {
         align-self: center;
     }
 }
