@@ -4,12 +4,14 @@ const navList = document.querySelector('.nav-list');
 const homeSection = document.getElementById('intro');
 const historySection = document.getElementById('history');
 const gallerySection = document.getElementById('gallery');
-
 const homeLink = navList.querySelector('[href="#intro"]');
 const historyLink = navList.querySelector('[href="#history"');
 const galleryLink = navList.querySelector('[href="#gallery"');
 
-function changeHeader(entries, introObserver) {
+let h1_IO = null;
+let currentLink = null;
+
+function changeHeader(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
             header.classList.remove('scrolled');
@@ -19,29 +21,7 @@ function changeHeader(entries, introObserver) {
     }
 }
 
-let h1_IO = null;
-
-const navList_RO = new ResizeObserver(entries => {
-    for (let entry of entries) {
-        if (h1_IO) {
-            h1_IO.unobserve(h1);
-        }
-        const headerHeight = header.getBoundingClientRect().height;
-        const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px 0px 0px'};
-        h1_IO = new IntersectionObserver(changeHeader, options);
-        h1_IO.observe(h1);
-    }
-})
-
-navList_RO.observe(navList);
-
-const sections_IO_options = {
-    rootMargin: '-49.99% 0px -50% 0px'
-}
-
-let currentLink = null;
-
-const sections_IO = new IntersectionObserver(entries => {
+function underlineCurrentLink(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
             let id = entry.target.getAttribute('id');
@@ -60,9 +40,29 @@ const sections_IO = new IntersectionObserver(entries => {
             }
         }
     }
-},
-sections_IO_options);
+}
 
-sections_IO.observe(homeSection)
-sections_IO.observe(historySection)
-sections_IO.observe(gallerySection)
+(function() {
+    const navList_RO = new ResizeObserver(entries => {
+        for (let entry of entries) {
+            if (h1_IO) {
+                h1_IO.unobserve(h1);
+            }
+            const headerHeight = header.getBoundingClientRect().height;
+            const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px 0px 0px'};
+            h1_IO = new IntersectionObserver(changeHeader, options);
+            h1_IO.observe(h1);
+        }
+    });
+    navList_RO.observe(navList);
+})();
+
+(function() {
+    const sections_IO_options = {
+        rootMargin: '-50% 0px -50% 0px'
+    }
+    const sections_IO = new IntersectionObserver(underlineCurrentLink, sections_IO_options);
+    sections_IO.observe(homeSection)
+    sections_IO.observe(historySection)
+    sections_IO.observe(gallerySection)
+})();
