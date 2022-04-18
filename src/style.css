@@ -64,6 +64,12 @@ p {
 
 .gallery-img {
     width: 100%;
+    transform: scale(0);
+    transition: transform 300ms ease-out;
+}
+
+.gallery-img.loaded {
+    transform: scale(1);
 }
 
 /*===================== LINK =====================*/

@@ -33,6 +33,7 @@ function loadImg(entries, observer) {
         if (entry.isIntersecting) {
             let img = entry.target.querySelector('img');
             img.src = img.getAttribute('data-src');
+            img.classList.add('loaded');
             observer.unobserve(entry.target);
         }
     }
