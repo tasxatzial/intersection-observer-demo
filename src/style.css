@@ -14,14 +14,9 @@ body {
 
 /*===================== JS =====================*/
 
-.scrolled-header {
-    background-color: #212121;
-    box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
-}
-
-.scrolled-header > .header-content {
-    padding-top: .5em;
-    padding-bottom: .5em;
+.intro-header {
+    background-color: transparent;
+    box-shadow: none;
 }
 
 .destinations-img.loaded-img {
@@ -112,14 +107,15 @@ header {
     position: fixed;
     z-index: 100;
     width: 100%;
-    background-color: transparent;
+    background-color: #212121;
+    box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
     transition: background-color 200ms;
 }
 
 .header-content {
     display: flex;
     align-items: center;
-    padding: 1em;
+    padding: 0.5em 1em;
     transition: padding 400ms;
 }
 
@@ -245,17 +241,5 @@ header {
     header {
         background-color: #212121 !important;
         box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75) !important;
-    }
-
-    .header-content {
-        padding-top: .5em !important;
-        padding-bottom: .5em !important;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) and (min-width: 42em) {  
-    .header-content {
-        padding-top: 1em !important;
-        padding-bottom: 1em !important;
     }
 }

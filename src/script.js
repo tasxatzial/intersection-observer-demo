@@ -8,9 +8,9 @@ const destinationItems = document.querySelectorAll('.destinations-item');
 function changeHeader(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
-            header.classList.remove('scrolled-header');
+            header.classList.add('intro-header');
         } else {
-            header.classList.add('scrolled-header');
+            header.classList.remove('intro-header');
         }
     }
 }
