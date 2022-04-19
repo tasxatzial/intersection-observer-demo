@@ -3,7 +3,8 @@ const h1 = document.querySelector('h1');
 const navList = document.querySelector('.nav-list');
 const sections = document.querySelectorAll('section');
 const destinationItems = document.querySelectorAll('.destinations-item');
-
+const images = document.querySelectorAll('.destinations-img');
+const planetBodies = document.querySelectorAll('.planet-body');
 
 function changeHeader(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
@@ -50,51 +51,71 @@ function slideText(entries, observer) {
     }
 }
 
-(function() {
-    let io = null;
-    const navList_RO = new ResizeObserver(create_h1_IO);
-    navList_RO.observe(navList);
-
-    function create_h1_IO(entries) {
-        if (io) {
-            io.unobserve(h1);
-        }
-        const headerHeight = header.getBoundingClientRect().height;
-        const options = {
-            threshold: 1,
-            rootMargin: -headerHeight + 'px 0px 0px 0px'
-        };
-        io = new IntersectionObserver(changeHeader, options);
-        io.observe(h1);
+function loadAllImages() {
+    for (let i = 0; i < images.length; i++) {
+        images[i].src = images[i].getAttribute('data-src');
+        images[i].classList.add('loaded-img');
     }
-})();
+}
 
-(function() {
-    const options = {
-        rootMargin: '-50% 0px -50% 0px'
-    };
-    const io = new IntersectionObserver(underlineCurrentLink, options);
-    sections.forEach(function(x, i) {
-        io.observe(x);
-    });
-})();
+function slideAllText() {
+    for (let i = 0; i < planetBodies.length; i++) {
+        planetBodies[i].classList.add('slide-in');
+    }
+}
 
-(function() {
-    const options = {
-        threshold: .8
-    };
-    const io = new IntersectionObserver(loadImg, options);
-    destinationItems.forEach(function(x, i) {
-        io.observe(x);
-    });
-})();
-
-(function() {
-    const options = {
-        threshold: .5
-    };
-    const io = new IntersectionObserver(slideText, options);
-    destinationItems.forEach(function(x, i) {
-        io.observe(x);
-    });
-})();
+if ('IntersectionObserver' in window &&
+    'IntersectionObserverEntry' in window &&
+    'isIntersecting' in window.IntersectionObserverEntry.prototype) {
+    (function() {
+        let io = null;
+        const navList_RO = new ResizeObserver(create_h1_IO);
+        navList_RO.observe(navList);
+    
+        function create_h1_IO(entries) {
+            if (io) {
+                io.unobserve(h1);
+            }
+            const headerHeight = header.getBoundingClientRect().height;
+            const options = {
+                threshold: 1,
+                rootMargin: -headerHeight + 'px 0px 0px 0px'
+            };
+            io = new IntersectionObserver(changeHeader, options);
+            io.observe(h1);
+        }
+    })();
+    
+    (function() {
+        const options = {
+            rootMargin: '-50% 0px -50% 0px'
+        };
+        const io = new IntersectionObserver(underlineCurrentLink, options);
+        sections.forEach(function(x, i) {
+            io.observe(x);
+        });
+    })();
+    
+    (function() {
+        const options = {
+            threshold: .8
+        };
+        const io = new IntersectionObserver(loadImg, options);
+        destinationItems.forEach(function(x, i) {
+            io.observe(x);
+        });
+    })();
+    
+    (function() {
+        const options = {
+            threshold: .5
+        };
+        const io = new IntersectionObserver(slideText, options);
+        destinationItems.forEach(function(x, i) {
+            io.observe(x);
+        });
+    })();
+}  else {
+    loadAllImages();
+    slideAllText();
+}
