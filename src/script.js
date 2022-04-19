@@ -2,15 +2,15 @@ const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const navList = document.querySelector('.nav-list');
 const sections = document.querySelectorAll('section');
-const galleryItems = document.querySelectorAll('.gallery-item');
+const destinationItems = document.querySelectorAll('.destinations-item');
 
 
 function changeHeader(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
-            header.classList.remove('scrolled');
+            header.classList.remove('scrolled-header');
         } else {
-            header.classList.add('scrolled');
+            header.classList.add('scrolled-header');
         }
     }
 }
@@ -34,7 +34,7 @@ function loadImg(entries, observer) {
         if (entry.isIntersecting) {
             let img = entry.target.querySelector('img');
             img.src = img.getAttribute('data-src');
-            img.classList.add('loaded');
+            img.classList.add('loaded-img');
             observer.unobserve(entry.target);
         }
     }
@@ -60,7 +60,10 @@ function slideText(entries, observer) {
             io.unobserve(h1);
         }
         const headerHeight = header.getBoundingClientRect().height;
-        const options = {threshold: 1, rootMargin: -headerHeight + 'px 0px 0px 0px'};
+        const options = {
+            threshold: 1,
+            rootMargin: -headerHeight + 'px 0px 0px 0px'
+        };
         io = new IntersectionObserver(changeHeader, options);
         io.observe(h1);
     }
@@ -75,11 +78,17 @@ function slideText(entries, observer) {
 })();
 
 (function() {
-    const io = new IntersectionObserver(loadImg, {});
-    galleryItems.forEach(x => io.observe(x));
+    const options = {
+        threshold: .8
+    };
+    const io = new IntersectionObserver(loadImg, options);
+    destinationItems.forEach(x => io.observe(x));
 })();
 
 (function() {
-    const io = new IntersectionObserver(slideText, {threshold: .3});
-    galleryItems.forEach(x => io.observe(x));
+    const options = {
+        threshold: .5
+    };
+    const io = new IntersectionObserver(slideText, options);
+    destinationItems.forEach(x => io.observe(x));
 })();

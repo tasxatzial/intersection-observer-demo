@@ -14,14 +14,18 @@ body {
 
 /*===================== JS =====================*/
 
-.scrolled {
+.scrolled-header {
     background-color: #212121;
     box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
 }
 
-.scrolled > .container {
+.scrolled-header > .header-content {
     padding-top: .5em;
     padding-bottom: .5em;
+}
+
+.destinations-img.loaded-img {
+    transform: scale(1);
 }
 
 /*===================== TEXT =====================*/
@@ -62,14 +66,10 @@ p {
     border-radius: 50%;
 }
 
-.gallery-img {
+.destinations-img {
     width: 100%;
     transform: scale(0);
-    transition: transform 300ms ease-out;
-}
-
-.gallery-img.loaded {
-    transform: scale(1);
+    transition: transform 500ms ease-out;
 }
 
 /*===================== LINK =====================*/
@@ -104,7 +104,7 @@ p {
 
 .intro-content,
 .history-content,
-.gallery-content {
+.destinations-content {
     padding: 1em 1em 2em;
 }
 
@@ -157,13 +157,13 @@ header {
     margin-bottom: 1.5em;
 }
 
-.gallery-item {
+.destinations-item {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.gallery-item:not(:last-child) {
+.destinations-item:not(:last-child) {
     margin-bottom: 3em;
 }
 
@@ -172,10 +172,21 @@ header {
     align-self: center;
 }
 
+/*************************************** HIGH RES ***************************************/
+
 @media screen and (min-width: 42em) {
     html {
         font-size: 110%;
     }
+
+    /*===================== JS =====================*/
+
+    .planet-body.slide-in {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    /*===================== TEXT =====================*/
 
     h1 {
         max-width: 60%;
@@ -183,13 +194,15 @@ header {
         text-align: left;
     }
 
+    /*===================== CONTAINER =====================*/
+
     .header-content {
         padding: 1em 2em 1em;
     }
     
     .intro-content,
     .history-content,
-    .gallery-content {
+    .destinations-content {
         padding: 1em 2em 2em;
     }
 
@@ -197,11 +210,11 @@ header {
         align-items: flex-end;
     }
 
-    .gallery-item {
+    .destinations-item {
         flex-direction: row;
     }
 
-    .gallery-item > * {
+    .destinations-item > * {
         max-width: 45%;
     }
 
@@ -214,10 +227,5 @@ header {
         opacity: 0;
         transition: transform 400ms ease-out,
                     opacity 400ms ease-in;
-    }
-
-    .planet-body.slide-in {
-        opacity: 1;
-        transform: translateX(0);
     }
 }
