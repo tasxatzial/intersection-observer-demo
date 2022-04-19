@@ -208,4 +208,16 @@ header {
     .planet-img-container {
         align-self: center;
     }
+
+    .planet-body {
+        transform: translateX(-50%);
+        opacity: 0;
+        transition: transform 400ms ease-out,
+                    opacity 400ms ease-in;
+    }
+
+    .planet-body.slide-in {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

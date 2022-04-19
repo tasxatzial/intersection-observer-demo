@@ -4,6 +4,7 @@ const navList = document.querySelector('.nav-list');
 const sections = document.querySelectorAll('section');
 const galleryItems = document.querySelectorAll('.gallery-item');
 
+
 function changeHeader(entries, observer) {
     for (let entry of entries) {
         if (entry.isIntersecting) {
@@ -39,6 +40,16 @@ function loadImg(entries, observer) {
     }
 }
 
+function slideText(entries, observer) {
+    for (let entry of entries) {
+        if (entry.isIntersecting) {
+            let planetBody = entry.target.querySelector('.planet-body');
+            planetBody.classList.add('slide-in');
+            observer.unobserve(entry.target);
+        }
+    }
+}
+
 (function() {
     let io = null;
     const navList_RO = new ResizeObserver(create_h1_IO);
@@ -65,5 +76,10 @@ function loadImg(entries, observer) {
 
 (function() {
     const io = new IntersectionObserver(loadImg, {});
+    galleryItems.forEach(x => io.observe(x));
+})();
+
+(function() {
+    const io = new IntersectionObserver(slideText, {threshold: .3});
     galleryItems.forEach(x => io.observe(x));
 })();
