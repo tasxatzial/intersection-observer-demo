@@ -6,8 +6,8 @@ const destinationItems = document.querySelectorAll('.destinations-item');
 
 
 function changeHeader(entries, observer) {
-    for (let entry of entries) {
-        if (entry.isIntersecting) {
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
             header.classList.add('intro-header');
         } else {
             header.classList.remove('intro-header');
@@ -16,9 +16,9 @@ function changeHeader(entries, observer) {
 }
 
 function underlineCurrentLink(entries, observer) {
-    for (let entry of entries) {
-        if (entry.isIntersecting) {
-            let id = entry.target.id;
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+            let id = entries[i].target.id;
             let currentUnderlined = navList.querySelector('.current-link');
             let newUnderlined = navList.querySelector('[href="#' + id + '"]');
             if (currentUnderlined) {
@@ -30,22 +30,22 @@ function underlineCurrentLink(entries, observer) {
 }
 
 function loadImg(entries, observer) {
-    for (let entry of entries) {
-        if (entry.isIntersecting) {
-            let img = entry.target.querySelector('img');
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+            let img = entries[i].target.querySelector('img');
             img.src = img.getAttribute('data-src');
             img.classList.add('loaded-img');
-            observer.unobserve(entry.target);
+            observer.unobserve(entries[i].target);
         }
     }
 }
 
 function slideText(entries, observer) {
-    for (let entry of entries) {
-        if (entry.isIntersecting) {
-            let planetBody = entry.target.querySelector('.planet-body');
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i].isIntersecting) {
+            let planetBody = entries[i].target.querySelector('.planet-body');
             planetBody.classList.add('slide-in');
-            observer.unobserve(entry.target);
+            observer.unobserve(entries[i].target);
         }
     }
 }
@@ -74,7 +74,9 @@ function slideText(entries, observer) {
         rootMargin: '-50% 0px -50% 0px'
     };
     const io = new IntersectionObserver(underlineCurrentLink, options);
-    sections.forEach(x => io.observe(x));
+    sections.forEach(function(x, i) {
+        io.observe(x);
+    });
 })();
 
 (function() {
@@ -82,7 +84,9 @@ function slideText(entries, observer) {
         threshold: .8
     };
     const io = new IntersectionObserver(loadImg, options);
-    destinationItems.forEach(x => io.observe(x));
+    destinationItems.forEach(function(x, i) {
+        io.observe(x);
+    });
 })();
 
 (function() {
@@ -90,5 +94,7 @@ function slideText(entries, observer) {
         threshold: .5
     };
     const io = new IntersectionObserver(slideText, options);
-    destinationItems.forEach(x => io.observe(x));
+    destinationItems.forEach(function(x, i) {
+        io.observe(x);
+    });
 })();
