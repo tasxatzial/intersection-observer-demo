@@ -2,9 +2,9 @@ const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const navList = document.querySelector('.nav-list');
 const navLinks = document.querySelectorAll('.nav-link');
-const destinationItems = document.querySelectorAll('.destinations-item');
+const destinations = document.querySelectorAll('.destination');
 const images = document.querySelectorAll('.destinations-img');
-const planetBodies = document.querySelectorAll('.planet-body');
+const destinationBodies = document.querySelectorAll('.destination-body');
 const introSection = document.getElementById('intro');
 const historySection = document.getElementById('history');
 const destinationsSection = document.getElementById('destinations');
@@ -48,7 +48,7 @@ function loadImg(entries, observer) {
 function slideText(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
-            let planetBody = entries[i].target.querySelector('.planet-body');
+            let planetBody = entries[i].target.querySelector('.destination-body');
             planetBody.classList.add('slide-in');
             observer.unobserve(entries[i].target);
         }
@@ -63,8 +63,8 @@ function loadAllImages() {
 }
 
 function slideAllText() {
-    for (let i = 0; i < planetBodies.length; i++) {
-        planetBodies[i].classList.add('slide-in');
+    for (let i = 0; i < destinationBodies.length; i++) {
+        destinationBodies[i].classList.add('slide-in');
     }
 }
 
@@ -105,7 +105,7 @@ if ('IntersectionObserver' in window &&
             threshold: .8
         };
         const io = new IntersectionObserver(loadImg, options);
-        destinationItems.forEach(function(x, i) {
+        destinations.forEach(function(x, i) {
             io.observe(x);
         });
     })();
@@ -115,7 +115,7 @@ if ('IntersectionObserver' in window &&
             threshold: .5
         };
         const io = new IntersectionObserver(slideText, options);
-        destinationItems.forEach(function(x, i) {
+        destinations.forEach(function(x, i) {
             io.observe(x);
         });
     })();

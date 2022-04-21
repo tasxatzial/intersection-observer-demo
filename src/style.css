@@ -27,6 +27,9 @@ body {
 h1 {
     max-width: 90%;
     color: white;
+    background-color: hsla(0, 0%, 0%, .5);
+    padding: 1rem 2rem;
+    border-radius: 30px;
     font-size: 2.5rem;
     text-align: center;
 }
@@ -44,11 +47,11 @@ p {
     line-height: 1.4;
 }
 
-.planet-title {
+.destination-title {
     margin: 0;
 }
 
-.planet-info {
+.destination-info {
     margin-bottom: 1.5em;
 }
 
@@ -128,7 +131,6 @@ header {
     display: flex;
     align-items: center;
     padding: 0.5em 1em;
-    transition: padding 400ms;
 }
 
 .nav-list {
@@ -150,7 +152,7 @@ the history section */
 .intro-section {
     position: relative;
     z-index: 100;
-    background-color: rgb(23, 25, 129);
+    background-color: black;
     background-image: url(img/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
 }
@@ -184,17 +186,17 @@ the negative,positive padding,margin combo is overlaped by the history section *
     z-index: 98;
 }
 
-.destinations-item {
+.destination {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.destinations-item:not(:last-child) {
+.destination:not(:last-child) {
     margin-bottom: 3em;
 }
 
-.planet-img-container {
+.destination-img-container {
     max-width: 80%;
     height: 100%; /* needed for older browsers */
     align-self: center;
@@ -202,14 +204,14 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
 /*************************************** HIGH RES ***************************************/
 
-@media screen and (min-width: 42em) {
+@media screen and (min-width: 45em) {
     html {
         font-size: 110%;
     }
 
     /*===================== JS =====================*/
 
-    .planet-body.slide-in {
+    .destination-body.slide-in {
         opacity: 1;
         transform: translateX(0);
     }
@@ -251,19 +253,19 @@ the negative,positive padding,margin combo is overlaped by the history section *
         align-items: flex-end;
     }
 
-    .destinations-item {
+    .destination {
         flex-direction: row;
     }
 
-    .destinations-item > * {
+    .destination > * {
         max-width: 45%;
     }
 
-    .planet-img-container {
+    .destination-img-container {
         align-self: center;
     }
 
-    .planet-body {
+    .destination-body {
         transform: translateX(-50%);
         opacity: 0;
         transition: transform 400ms ease-out,
