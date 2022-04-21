@@ -1,6 +1,5 @@
 * {
     box-sizing: border-box;
-    scroll-margin-top: 2.5rem;
 }
 
 html {
@@ -98,6 +97,14 @@ p {
     margin: 0 auto;
 }
 
+/* needed so that we scroll exactly to start of the section */
+.intro-section,
+.history-section,
+.destinations-section {
+    padding-top: 3em;
+    margin-top: -3em;
+}
+
 .intro-content,
 .history-content,
 .destinations-content {
@@ -106,8 +113,12 @@ p {
 
 header {
     position: fixed;
-    z-index: 100;
+    z-index: 200;
     width: 100%;
+
+    /* needed because it is pushed up due to negative margin in intro-section */
+    margin-top: 3em;
+
     background-color: #212121;
     box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
     transition: background-color 200ms;
@@ -132,7 +143,13 @@ header {
     margin: 0 1em;
 }
 
+
+/* needs to appear on top of history section so that it overlaps the
+extra space created by the negative,positive padding,margin combo in
+the history section */
 .intro-section {
+    position: relative;
+    z-index: 100;
     background-color: rgb(23, 25, 129);
     background-image: url(img/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
@@ -143,15 +160,28 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100vh;   
 }
 
+/* needs to be stacked above destinations section so that it overlaps the
+extra space created by the negative,positive padding,margin combo in
+the destinations section.
+It also needs to be stacked under intro section, see the relevant comment there */
 .history-section {
+    position: relative;
+    z-index: 99;
     background-color: ghostwhite;
 }
 
 .history-content > * + * {
     margin-bottom: 1.5em;
+}
+
+/* needs to be stacked under history section so the extra space created by
+the negative,positive padding,margin combo is overlaped by the history section */
+.destinations-section {
+    position: relative;
+    z-index: 98;
 }
 
 .destinations-item {
@@ -193,6 +223,19 @@ header {
     }
 
     /*===================== CONTAINER =====================*/
+
+    /* needed because it is pushed up due to negative margin in intro-section */
+    header {
+        margin-top: 4em;
+    }
+
+    /* needed so that we scroll exactly to start of the section */
+    .intro-section,
+    .history-section,
+    .destinations-section {
+        padding-top: 4em;
+        margin-top: -4em;
+    }
 
     .header-content {
         padding: 1em 2em 1em;

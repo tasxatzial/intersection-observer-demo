@@ -1,10 +1,14 @@
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const navList = document.querySelector('.nav-list');
-const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-link');
 const destinationItems = document.querySelectorAll('.destinations-item');
 const images = document.querySelectorAll('.destinations-img');
 const planetBodies = document.querySelectorAll('.planet-body');
+const introSection = document.getElementById('intro');
+const historySection = document.getElementById('history');
+const destinationsSection = document.getElementById('destinations');
+
 
 function changeHeader(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
@@ -91,9 +95,9 @@ if ('IntersectionObserver' in window &&
             rootMargin: '-50% 0px -50% 0px'
         };
         const io = new IntersectionObserver(underlineCurrentLink, options);
-        sections.forEach(function(x, i) {
-            io.observe(x);
-        });
+        io.observe(introSection);
+        io.observe(historySection);
+        io.observe(destinationsSection);
     })();
     
     (function() {
