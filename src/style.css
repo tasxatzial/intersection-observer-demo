@@ -22,6 +22,11 @@ body {
     transform: scale(1);
 }
 
+.slide-in {
+    transform: translate(0);
+    opacity: 1;
+}
+
 /*===================== TEXT =====================*/
 
 h1 {
@@ -32,6 +37,10 @@ h1 {
     border-radius: 30px;
     font-size: 2.5rem;
     text-align: center;
+    transform: translateY(50%);
+    opacity: .1;
+    transition: transform 1000ms ease-out,
+                opacity 500ms ease-in;
 }
 
 h1 span {
@@ -67,7 +76,7 @@ p {
 .destinations-img {
     width: 100%;
     transform: scale(0);
-    transition: transform 500ms ease-out;
+    transition: transform 600ms ease-out;
 }
 
 /*===================== LINK =====================*/
@@ -268,7 +277,7 @@ the negative,positive padding,margin combo is overlaped by the history section *
     .destination-body {
         transform: translateX(-50%);
         opacity: 0;
-        transition: transform 400ms ease-out,
+        transition: transform 600ms ease-out,
                     opacity 400ms ease-in;
     }
 }

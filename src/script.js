@@ -68,6 +68,10 @@ function slideAllText() {
     }
 }
 
+window.onload = function() {
+    h1.classList.add('slide-in');
+};
+
 if ('IntersectionObserver' in window &&
     'IntersectionObserverEntry' in window &&
     'isIntersecting' in window.IntersectionObserverEntry.prototype) {
