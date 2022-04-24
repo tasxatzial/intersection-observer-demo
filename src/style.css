@@ -102,6 +102,15 @@ p {
     border-bottom: 3px solid mediumaquamarine;
 }
 
+/*===================== BUTTON =====================*/
+
+.toggle-nav {
+    border: 0;
+    color: white;
+    background-color: transparent;
+    font-size: 1.7rem;
+}
+
 /*===================== CONTAINER =====================*/
 
 .container {
@@ -138,12 +147,20 @@ header {
 
 .header-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 0.5em 1em;
 }
 
+nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1em 1em 0;
+}
+
 .nav-list {
-    display: flex;
     padding: 0;
     margin: 0;
     text-decoration: none;
@@ -151,9 +168,8 @@ header {
 }
 
 .nav-item {
-    margin: 0 1em;
+    margin-bottom: 1em;
 }
-
 
 /* needs to appear on top of history section so that it overlaps the
 extra space created by the negative,positive padding,margin combo in
