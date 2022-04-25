@@ -82,6 +82,7 @@ function slideAllText() {
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
+        showNavList();
         navBtn.setAttribute('aria-expanded', 'true');
         header.classList.remove('js-bg-transparent');
         header.classList.remove('box-shadow');
@@ -111,6 +112,30 @@ function autoCloseNav(e) {
     }
 }
 
+function hideNavList_OnTransitionEnd() {
+    if (!mqList.matches && !header.classList.contains('js-nav-open')) {
+        navList.classList.add('hidden');
+    }
+}
+
+function showNavList() {
+    navList.classList.remove('hidden');
+}
+
+function getTransitionEndEventName() {
+    let transitions = {
+        "transition"      : "transitionend",
+        "OTransition"     : "oTransitionEnd",
+        "MozTransition"   : "transitionend",
+        "WebkitTransition": "webkitTransitionEnd"
+    };
+    for (let transition in transitions) {
+        if (document.body.style[transition] !== undefined) {
+            return transitions[transition];
+        } 
+    }
+}
+  
 window.onload = function() {
     h1.classList.add('js-slide-in');
 };
@@ -172,8 +197,10 @@ if ('IntersectionObserver' in window &&
 }
 
 (function() {
+    const transitionEnd = getTransitionEndEventName();
     navBtn.addEventListener('click', toggleNav);
     navBtn.removeAttribute('disabled');
+    navList.addEventListener(transitionEnd, hideNavList_OnTransitionEnd);
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
     }
@@ -181,6 +208,7 @@ if ('IntersectionObserver' in window &&
     mqList.addEventListener('change', function() {
         if (mqList.matches) {
             closeNav();
+            showNavList();
         }
     });
 })();

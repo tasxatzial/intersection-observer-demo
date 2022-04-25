@@ -17,6 +17,10 @@ body {
     box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 /*===================== JS =====================*/
 
 .destination-img.js-loaded-img {
@@ -30,10 +34,6 @@ body {
 .js-nav-open .nav-list {
     opacity:  1;
     transition: opacity 150ms 150ms;
-}
-
-.js-nav-open .nav-link {
-    visibility: visible;
 }
 
 .js-bg-transparent {
@@ -106,7 +106,6 @@ p {
 }
 
 .nav-link {
-    visibility: hidden;
     color: white;
     font-size: 1.2rem;
     font-variant: small-caps;
@@ -188,11 +187,11 @@ nav {
     text-decoration: none;
     list-style: none;
     opacity: 0;
-    transition: opacity 50ms;
+    transition: opacity 100ms;
 }
 
 .nav-item {
-    margin-bottom: 1em;
+    margin-bottom: 1.5em;
 }
 
 /* needs to appear on top of history section so that it overlaps the
@@ -286,7 +285,8 @@ the negative,positive padding,margin combo is overlaped by the history section *
         margin-top: 4em;
     }
 
-    nav:not(.js-nav-open) {
+    nav {
+        visibility: visible;
         position: static;
         padding: 0;
         margin-right: auto;
@@ -301,10 +301,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     .nav-item {
         margin: 0 1em;
-    }
-
-    .nav-link {
-        visibility: visible;
     }
 
     /* needed so that we scroll exactly to start of the section */
