@@ -5,7 +5,7 @@ const navList = nav.querySelector('.nav-list');
 const navLinks = nav.querySelectorAll('.nav-link');
 const navBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
-const images = document.querySelectorAll('.destinations-img');
+const images = document.querySelectorAll('.destination-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
 const introSection = document.getElementById('intro');
 const historySection = document.getElementById('history');
@@ -16,16 +16,16 @@ function changeHeader(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
             if (!header.classList.contains('js-nav-open')) {
-                header.classList.add('bg-transparent');
+                header.classList.add('js-bg-transparent');
             }
-            header.classList.remove('dbox-shadow');
-            header.classList.add('on-top');
+            header.classList.remove('box-shadow');
+            header.classList.add('above-h1');
         } else {
             if (!header.classList.contains('js-nav-open')) {
                 header.classList.add('box-shadow');
             }
-            header.classList.remove('bg-transparent');
-            header.classList.remove('on-top');
+            header.classList.remove('js-bg-transparent');
+            header.classList.remove('above-h1');
         }
     }
 }
@@ -49,7 +49,7 @@ function loadImg(entries, observer) {
         if (entries[i].isIntersecting) {
             let img = entries[i].target.querySelector('img');
             img.src = img.getAttribute('data-src');
-            img.classList.add('loaded-img');
+            img.classList.add('js-loaded-img');
             observer.unobserve(entries[i].target);
         }
     }
@@ -59,7 +59,7 @@ function slideText(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
             let planetBody = entries[i].target.querySelector('.destination-body');
-            planetBody.classList.add('slide-in');
+            planetBody.classList.add('js-slide-in');
             observer.unobserve(entries[i].target);
         }
     }
@@ -68,23 +68,23 @@ function slideText(entries, observer) {
 function loadAllImages() {
     for (let i = 0; i < images.length; i++) {
         images[i].src = images[i].getAttribute('data-src');
-        images[i].classList.add('loaded-img');
+        images[i].classList.add('js-loaded-img');
     }
 }
 
 function slideAllText() {
     for (let i = 0; i < destinationBodies.length; i++) {
-        destinationBodies[i].classList.add('slide-in');
+        destinationBodies[i].classList.add('js-slide-in');
     }
 }
 
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
-        header.classList.remove('bg-transparent');
+        header.classList.remove('js-bg-transparent');
         header.classList.remove('box-shadow');
-    } else if (header.classList.contains('on-top')) {
-        header.classList.add('bg-transparent');
+    } else if (header.classList.contains('above-h1')) {
+        header.classList.add('js-bg-transparent');
         header.classList.remove('box-shadow');
     } else {
         header.classList.add('box-shadow');
@@ -101,7 +101,7 @@ function autoCloseNav(e) {
 }
 
 window.onload = function() {
-    h1.classList.add('slide-in');
+    h1.classList.add('js-slide-in');
 };
 
 if ('IntersectionObserver' in window &&
