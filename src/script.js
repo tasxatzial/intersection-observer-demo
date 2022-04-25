@@ -10,6 +10,7 @@ const destinationBodies = document.querySelectorAll('.destination-body');
 const introSection = document.getElementById('intro');
 const historySection = document.getElementById('history');
 const destinationsSection = document.getElementById('destinations');
+const mqList = window.matchMedia("(min-width: 45rem)");
 
 
 function changeHeader(entries, observer) {
@@ -91,6 +92,12 @@ function toggleNav() {
     }
 }
 
+function closeNav() {
+    if (header.classList.contains('js-nav-open')) {
+        toggleNav();
+    }
+}
+
 function autoCloseNav(e) {
     if (header.classList.contains('js-nav-open') &&
         (introSection.contains(e.target) ||
@@ -164,7 +171,12 @@ if ('IntersectionObserver' in window &&
     navBtn.addEventListener('click', toggleNav);
     navBtn.removeAttribute('disabled');
     for (let i = 0; i < navLinks.length; i++) {
-        navLinks[i].addEventListener('click', toggleNav);
+        navLinks[i].addEventListener('click', closeNav);
     }
     window.addEventListener('click', autoCloseNav);
+    mqList.addEventListener('change', function() {
+        if (mqList.matches) {
+            closeNav();
+        }
+    });
 })();

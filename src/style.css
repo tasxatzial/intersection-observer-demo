@@ -268,11 +268,34 @@ the negative,positive padding,margin combo is overlaped by the history section *
         text-align: left;
     }
 
+    /*===================== BUTTON =====================*/
+
+    .toggle-nav {
+        display: none;
+    }
+
     /*===================== CONTAINER =====================*/
 
     /* needed because it is pushed up due to negative margin in intro-section */
     header {
         margin-top: 4em;
+    }
+
+    nav:not(.js-nav-open) {
+        position: static;
+        padding: 0;
+        margin-right: auto;
+        background-color: inherit;
+        transform: scale(1);
+    }
+
+    .nav-list {
+        display: flex;
+        opacity: 1;
+    }
+
+    .nav-item {
+        margin: 0 1em;
     }
 
     /* needed so that we scroll exactly to start of the section */
