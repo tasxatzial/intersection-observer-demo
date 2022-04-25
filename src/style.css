@@ -11,20 +11,38 @@ body {
     font-family: 'Lato', sans-serif;
 }
 
-/*===================== JS =====================*/
+/*===================== UTILITY =====================*/
 
-.intro-header {
-    background-color: transparent;
-    box-shadow: none;
+.slide-in {
+    transform: translate(0);
+    opacity: 1;
 }
+
+.bg-transparent {
+    background-color: transparent;
+}
+
+.box-shadow {
+    box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
+}
+
+/*===================== JS =====================*/
 
 .destinations-img.loaded-img {
     transform: scale(1);
 }
 
-.slide-in {
-    transform: translate(0);
-    opacity: 1;
+.js-nav-open nav {
+    transform: scaleY(1);
+}
+
+.js-nav-open .nav-list {
+    opacity:  1;
+    transition: opacity 150ms 150ms;
+}
+
+header.bg-transparent {
+    transition: background-color 300ms 300ms;
 }
 
 /*===================== TEXT =====================*/
@@ -141,8 +159,6 @@ header {
     margin-top: 3em;
 
     background-color: #212121;
-    box-shadow: 0px 0px 20px -5px rgba(0,0,0,0.75);
-    transition: background-color 200ms;
 }
 
 .header-content {
@@ -158,6 +174,10 @@ nav {
     left: 0;
     width: 100%;
     padding: 1em 1em 0;
+    background-color: #212121;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 300ms ease-out;
 }
 
 .nav-list {
@@ -165,6 +185,8 @@ nav {
     margin: 0;
     text-decoration: none;
     list-style: none;
+    opacity: 0;
+    transition: opacity 50ms;
 }
 
 .nav-item {

@@ -1,7 +1,9 @@
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
-const navList = document.querySelector('.nav-list');
-const navLinks = document.querySelectorAll('.nav-link');
+const nav = document.querySelector('nav');
+const navList = nav.querySelector('.nav-list');
+const navLinks = nav.querySelectorAll('.nav-link');
+const navBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const images = document.querySelectorAll('.destinations-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
@@ -13,9 +15,17 @@ const destinationsSection = document.getElementById('destinations');
 function changeHeader(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
-            header.classList.add('intro-header');
+            if (!header.classList.contains('js-nav-open')) {
+                header.classList.add('bg-transparent');
+            }
+            header.classList.remove('dbox-shadow');
+            header.classList.add('on-top');
         } else {
-            header.classList.remove('intro-header');
+            if (!header.classList.contains('js-nav-open')) {
+                header.classList.add('box-shadow');
+            }
+            header.classList.remove('bg-transparent');
+            header.classList.remove('on-top');
         }
     }
 }
@@ -68,6 +78,19 @@ function slideAllText() {
     }
 }
 
+function toggleNav() {
+    header.classList.toggle('js-nav-open');
+    if (header.classList.contains('js-nav-open')) {
+        header.classList.remove('bg-transparent');
+        header.classList.remove('box-shadow');
+    } else if (header.classList.contains('on-top')) {
+        header.classList.add('bg-transparent');
+        header.classList.remove('box-shadow');
+    } else {
+        header.classList.add('box-shadow');
+    }
+}
+
 window.onload = function() {
     h1.classList.add('slide-in');
 };
@@ -79,7 +102,7 @@ if ('IntersectionObserver' in window &&
         let io = null;
         const navList_RO = new ResizeObserver(create_h1_IO);
         navList_RO.observe(navList);
-    
+
         function create_h1_IO(entries) {
             if (io) {
                 io.unobserve(h1);
@@ -127,3 +150,11 @@ if ('IntersectionObserver' in window &&
     loadAllImages();
     slideAllText();
 }
+
+(function() {
+    navBtn.addEventListener('click', toggleNav);
+    navBtn.removeAttribute('disabled');
+    for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', toggleNav);
+    }
+})();
