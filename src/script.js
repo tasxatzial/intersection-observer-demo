@@ -91,6 +91,15 @@ function toggleNav() {
     }
 }
 
+function autoCloseNav(e) {
+    if (header.classList.contains('js-nav-open') &&
+        (introSection.contains(e.target) ||
+         historySection.contains(e.target) ||
+         destinationsSection.contains(e.target))) {
+             toggleNav();
+    }
+}
+
 window.onload = function() {
     h1.classList.add('slide-in');
 };
@@ -157,4 +166,5 @@ if ('IntersectionObserver' in window &&
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', toggleNav);
     }
+    window.addEventListener('click', autoCloseNav);
 })();
