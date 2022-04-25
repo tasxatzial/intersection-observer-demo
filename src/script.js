@@ -82,9 +82,13 @@ function slideAllText() {
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
+        navBtn.setAttribute('aria-expanded', 'true');
         header.classList.remove('js-bg-transparent');
         header.classList.remove('box-shadow');
-    } else if (header.classList.contains('above-h1')) {
+        return;
+    }
+    navBtn.setAttribute('aria-expanded', 'false');
+    if (header.classList.contains('above-h1')) {
         header.classList.add('js-bg-transparent');
         header.classList.remove('box-shadow');
     } else {

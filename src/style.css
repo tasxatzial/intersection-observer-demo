@@ -32,6 +32,10 @@ body {
     transition: opacity 150ms 150ms;
 }
 
+.js-nav-open .nav-link {
+    visibility: visible;
+}
+
 .js-bg-transparent {
     background-color: transparent;
     transition: background-color 300ms 300ms;
@@ -102,6 +106,7 @@ p {
 }
 
 .nav-link {
+    visibility: hidden;
     color: white;
     font-size: 1.2rem;
     font-variant: small-caps;
@@ -296,6 +301,10 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     .nav-item {
         margin: 0 1em;
+    }
+
+    .nav-link {
+        visibility: visible;
     }
 
     /* needed so that we scroll exactly to start of the section */

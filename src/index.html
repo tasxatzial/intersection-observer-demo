@@ -14,23 +14,23 @@
     <header>
         <div class="header-content container">
             <a href="index.html" class="logo-link"><img src="img/logo.svg" alt="site logo"></a>
-            <nav>
+            <nav id="nav">
                 <ul class="nav-list">
                     <li class="nav-item"><a href="#intro" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="#history" class="nav-link">History</a></li>
                     <li class="nav-item"><a href="#destinations" class="nav-link">Destinations</a></li>
                 </ul>
             </nav>
-            <button class="toggle-nav" disabled>☰</button>
+            <button class="toggle-nav" aria-label="toggle navigation." aria-controls="nav" aria-expanded="false" disabled>☰</button>
         </div>
     </header>
-    <section id="intro" class="intro-section">
+    <section id="intro" class="intro-section" aria-label="home.">
         <div class="intro-content container">
             <h1>So, you want to <span>travel</span> to space?</h1>
         </div>
     </section>
     <main>
-        <section id="history" class="history-section">
+        <section id="history" class="history-section" aria-label="history.">
             <div class="history-content container">
                 <h2>History of space exploration</h2>
                 <div>
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </section>
-        <section id="destinations" class="destinations-section">
+        <section id="destinations" class="destinations-section" aria-label="destinations.">
             <div class="destinations-content container">
                 <h2>Destinations</h2>
                 <div class="destination">
