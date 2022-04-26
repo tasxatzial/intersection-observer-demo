@@ -128,6 +128,7 @@ p {
     color: white;
     background-color: transparent;
     font-size: 1.7rem;
+    cursor: pointer;
 }
 
 /*===================== CONTAINER =====================*/
@@ -201,7 +202,6 @@ the history section */
     position: relative;
     z-index: 100;
     background-color: black;
-    background-image: url(img/nasa-Q1p7bh3SHj8-unsplash.jpg);
     background-size: cover;
 }
 
@@ -248,6 +248,12 @@ the negative,positive padding,margin combo is overlaped by the history section *
     max-width: 80%;
     height: 100%; /* needed for older browsers */
     align-self: center;
+}
+
+@media screen and (max-width: 45em) {
+    .intro-section {
+        background-image: url(img/nasa_744.jpg);
+    }
 }
 
 /*************************************** HIGH RES ***************************************/
@@ -301,6 +307,10 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     .nav-item {
         margin: 0 1em;
+    }
+
+    .intro-section {
+        background-image: url(img/nasa_1702.jpg);
     }
 
     /* needed so that we scroll exactly to start of the section */
