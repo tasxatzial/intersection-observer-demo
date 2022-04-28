@@ -86,8 +86,8 @@ p {
 /*===================== IMAGE =====================*/
 
 .logo-link img {
-    max-width: 2rem;
-    max-height: 2rem; /* needed for older browsers */
+    max-width: 2em;
+    max-height: 2em; /* needed for older browsers */
     border: 1px solid black;
     border-radius: 50%;
 }
@@ -134,7 +134,7 @@ p {
 /*===================== CONTAINER =====================*/
 
 .container {
-    max-width: 60rem;
+    max-width: 60em;
     margin: 0 auto;
 }
 
@@ -246,7 +246,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
 .destination-img-container {
     max-width: 80%;
-    height: 100%; /* needed for older browsers */
     align-self: center;
 }
 
@@ -259,9 +258,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
 /*************************************** HIGH RES ***************************************/
 
 @media screen and (min-width: 45em) {
-    html {
-        font-size: 110%;
-    }
 
     /*===================== JS =====================*/
 
