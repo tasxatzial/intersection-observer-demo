@@ -32,6 +32,7 @@ body {
 }
 
 .js-nav-open .nav-list {
+    visibility: visible;
     opacity:  1;
     transition: opacity 150ms 150ms;
 }
@@ -183,6 +184,7 @@ nav {
 }
 
 .nav-list {
+    visibility: hidden;
     padding: 0;
     margin: 0;
     text-decoration: none;
@@ -298,6 +300,7 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     .nav-list {
         display: flex;
+        visibility: visible;
         opacity: 1;
     }
 
