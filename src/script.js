@@ -199,7 +199,6 @@ if ('IntersectionObserver' in window &&
 (function() {
     const transitionEnd = getTransitionEndEventName();
     navBtn.addEventListener('click', toggleNav);
-    navBtn.removeAttribute('disabled');
     navList.addEventListener(transitionEnd, hideNavList_OnTransitionEnd);
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
