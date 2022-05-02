@@ -7,9 +7,9 @@ const navBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const images = document.querySelectorAll('.destination-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
-const introSection = document.getElementById('intro');
-const historySection = document.getElementById('history');
-const destinationsSection = document.getElementById('destinations');
+const introSection = document.querySelector('.intro-section');
+const historySection = document.querySelector('.history-section');
+const destinationsSection = document.querySelector('.destinations-section');
 const mqList = window.matchMedia("(min-width: 45rem)");
 
 
