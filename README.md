@@ -27,7 +27,7 @@ To get the full experience you'll need:
 * Browser support for scroll-behavior: smooth
 * Animations enabled.
 
-There are also full fallbacks when the APIs are not supported and/or animations are disabled. The page should display and function properly even in IE 11 although it needs just a manual refresh when switching from mobile to desktop view and vise versa.
+There are also fallbacks when the APIs are not supported and/or animations are disabled. The page should display and function properly even in IE 11.
 
 ## Run locally
 
