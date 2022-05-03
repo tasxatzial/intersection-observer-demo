@@ -82,7 +82,7 @@ function slideAllText() {
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
-        showNavList();
+        nav.classList.remove('hidden');
         navBtn.setAttribute('aria-expanded', 'true');
         header.classList.remove('js-bg-transparent');
         header.classList.remove('box-shadow');
@@ -112,20 +112,15 @@ function autoCloseNav(e) {
     }
 }
 
-function hideNavList_OnTransitionEnd() {
+function hideNav_afterTransition() {
     if (!mqList.matches && !header.classList.contains('js-nav-open')) {
-        navList.classList.add('hidden');
+        nav.classList.add('hidden');
     }
 }
 
-function showNavList() {
-    navList.classList.remove('hidden');
-}
-
-function switchToDesktop() {
+function closeNavOnResize() {
     if (mqList.matches) {
         closeNav();
-        showNavList();
     }
 }
 
@@ -200,16 +195,10 @@ if ('IntersectionObserver' in window &&
 }
 
 (function() {
-    const transitionEnd = getTransitionEndEventName();
-    navBtn.addEventListener('click', toggleNav);
-    navList.addEventListener(transitionEnd, hideNavList_OnTransitionEnd);
-    for (let i = 0; i < navLinks.length; i++) {
-        navLinks[i].addEventListener('click', closeNav);
-    }
     if (mqList.addEventListener) {
-        mqList.addEventListener('change', switchToDesktop);
+        mqList.addEventListener('change', closeNavOnResize);
     } else {
-        mqList.addListener(switchToDesktop);
+        mqList.addListener(closeNavOnResize);
     }
     if (window.addEventListener) {
         window.addEventListener('click', autoCloseNav);
@@ -224,4 +213,12 @@ if ('IntersectionObserver' in window &&
             h1.classList.add('js-slide-in');
         }
     }
+    navList.addEventListener(getTransitionEndEventName(), hideNav_afterTransition);
+    for (let i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', closeNav);
+    }
+    if (!mqList.matches) {
+        nav.classList.add('hidden');
+    }
+    navBtn.addEventListener('click', toggleNav);
 })();
