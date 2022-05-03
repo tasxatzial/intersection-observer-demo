@@ -126,6 +126,7 @@ p {
 
 .toggle-nav {
     border: 0;
+    margin-left: auto;
     color: white;
     background-color: transparent;
     font-size: 1.7rem;
