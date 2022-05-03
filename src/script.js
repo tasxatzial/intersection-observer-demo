@@ -122,6 +122,13 @@ function showNavList() {
     navList.classList.remove('hidden');
 }
 
+function switchToDesktop() {
+    if (mqList.matches) {
+        closeNav();
+        showNavList();
+    }
+}
+
 function getTransitionEndEventName() {
     let transitions = {
         "transition"      : "transitionend",
@@ -135,10 +142,6 @@ function getTransitionEndEventName() {
         } 
     }
 }
-  
-window.onload = function() {
-    h1.classList.add('js-slide-in');
-};
 
 if ('IntersectionObserver' in window &&
     'IntersectionObserverEntry' in window &&
@@ -203,11 +206,22 @@ if ('IntersectionObserver' in window &&
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
     }
-    window.addEventListener('click', autoCloseNav);
-    mqList.addEventListener('change', function() {
-        if (mqList.matches) {
-            closeNav();
-            showNavList();
+    if (mqList.addEventListener) {
+        mqList.addEventListener('change', switchToDesktop);
+    } else {
+        mqList.addListener(switchToDesktop);
+    }
+    if (window.addEventListener) {
+        window.addEventListener('click', autoCloseNav);
+        window.addEventListener('load', function() {
+            h1.classList.add('js-slide-in');
+        });
+    } else {
+        window.onclick = function() {
+            autoCloseNav();
         }
-    });
+        window.onload = function() {
+            h1.classList.add('js-slide-in');
+        }
+    }
 })();
