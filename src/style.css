@@ -50,14 +50,14 @@ body {
 
 h1 {
     max-width: 90%;
-    color: white;
-    background-color: hsla(0, 0%, 0%, .5);
     padding: 1rem 2rem;
+    background-color: hsla(0, 0%, 0%, .5);
     border-radius: 30px;
     font-size: 2.5rem;
     text-align: center;
-    transform: translateY(50%);
+    color: white;
     opacity: .1;
+    transform: translateY(50%);
     transition: transform 1000ms ease-out,
                 opacity 500ms ease-in;
 }
@@ -90,6 +90,11 @@ p {
     max-height: 2em; /* needed for older browsers */
     border: 1px solid black;
     border-radius: 50%;
+}
+
+.destination-img-container {
+    max-width: 80%;
+    align-self: center;
 }
 
 .destination-img {
@@ -245,11 +250,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
     margin-bottom: 3em;
 }
 
-.destination-img-container {
-    max-width: 80%;
-    align-self: center;
-}
-
 @media screen and (max-width: 45em) {
     .intro-section {
         background-image: url(img/nasa_744.jpg);
@@ -273,6 +273,12 @@ the negative,positive padding,margin combo is overlaped by the history section *
         max-width: 60%;
         font-size: 3rem;
         text-align: left;
+    }
+
+    /*===================== IMAGE =====================*/
+
+    .destination-img-container {
+        align-self: center;
     }
 
     /*===================== BUTTON =====================*/
@@ -339,10 +345,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     .destination > * {
         max-width: 45%;
-    }
-
-    .destination-img-container {
-        align-self: center;
     }
 
     .destination-body {
