@@ -7,9 +7,9 @@ const navBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const images = document.querySelectorAll('.destination-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
-const introSection = document.querySelector('.intro-section');
-const historySection = document.querySelector('.history-section');
-const destinationsSection = document.querySelector('.destinations-section');
+const introContent = document.querySelector('.intro-content');
+const historyContent = document.querySelector('.history-content');
+const destinationsContent = document.querySelector('.destinations-content');
 const mqList = window.matchMedia("(min-width: 45rem)");
 
 
@@ -34,7 +34,7 @@ function changeHeader(entries, observer) {
 function underlineCurrentLink(entries, observer) {
     for (let i = 0; i < entries.length; i++) {
         if (entries[i].isIntersecting) {
-            let id = entries[i].target.id;
+            let id = entries[i].target.parentNode.id;
             let currentUnderlined = navList.querySelector('.current-link');
             let newUnderlined = navList.querySelector('[href="#' + id + '"]');
             if (currentUnderlined) {
@@ -105,9 +105,9 @@ function closeNav() {
 
 function autoCloseNav(e) {
     if (header.classList.contains('js-nav-open') &&
-        (introSection.contains(e.target) ||
-         historySection.contains(e.target) ||
-         destinationsSection.contains(e.target))) {
+        (introContent.contains(e.target) ||
+         historyContent.contains(e.target) ||
+         destinationsContent.contains(e.target))) {
              toggleNav();
     }
 }
@@ -166,9 +166,9 @@ function createObservers() {
                 rootMargin: '-50% 0px -50% 0px'
             };
             const io = new IntersectionObserver(underlineCurrentLink, options);
-            io.observe(introSection);
-            io.observe(historySection);
-            io.observe(destinationsSection);
+            io.observe(introContent);
+            io.observe(historyContent);
+            io.observe(destinationsContent);
         })();
         
         (function() {
