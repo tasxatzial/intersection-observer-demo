@@ -23,6 +23,14 @@ body {
 
 /*===================== JS =====================*/
 
+.js-focus-visible :focus:not(.focus-visible) {
+    outline: none;
+}
+
+.js-focus-visible .focus-visible {
+    outline: 2px dotted white;
+}
+
 .destination-img.js-loaded-img {
     transform: scale(1);
 }
@@ -117,7 +125,6 @@ p {
     text-decoration: none;
 }
 
-.nav-link:focus,
 .nav-link:hover {
     color: mediumaquamarine;
 }
