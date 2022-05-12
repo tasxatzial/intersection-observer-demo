@@ -252,7 +252,7 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
 @media screen and (max-width: 45em) {
     .intro-section {
-        background-image: url(img/nasa_744.jpg);
+        background-image: url(../img/nasa_744.jpg);
     }
 }
 
@@ -314,7 +314,7 @@ the negative,positive padding,margin combo is overlaped by the history section *
     }
 
     .intro-section {
-        background-image: url(img/nasa_1702.jpg);
+        background-image: url(../img/nasa_1702.jpg);
     }
 
     /* needed so that we scroll exactly to start of the section */
