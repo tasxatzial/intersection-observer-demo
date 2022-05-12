@@ -138,59 +138,68 @@ function getTransitionEndEventName() {
     }
 }
 
-function createObservers() {
-    if ('IntersectionObserver' in window &&
-        'IntersectionObserverEntry' in window &&
-        'isIntersecting' in window.IntersectionObserverEntry.prototype) {
-        (function() {
-            let io = null;
-            const navList_RO = new ResizeObserver(create_h1_IO);
-            navList_RO.observe(navList);
+function supportsObservers() {
+    return 'IntersectionObserver' in window &&
+           'IntersectionObserverEntry' in window &&
+           'isIntersecting' in window.IntersectionObserverEntry.prototype;
+}
 
-            function create_h1_IO(entries) {
-                if (io) {
-                    io.unobserve(h1);
-                }
-                const headerHeight = header.getBoundingClientRect().height;
-                const options = {
-                    threshold: 1,
-                    rootMargin: -headerHeight + 'px 0px 0px 0px'
-                };
-                io = new IntersectionObserver(changeHeader, options);
-                io.observe(h1);
+function createObservers() {
+    (function() {
+        let io = null;
+        const navList_RO = new ResizeObserver(create_h1_IO);
+        navList_RO.observe(navList);
+
+        function create_h1_IO(entries) {
+            if (io) {
+                io.unobserve(h1);
             }
-        })();
-        
-        (function() {
+            const headerHeight = header.getBoundingClientRect().height;
             const options = {
-                rootMargin: '-50% 0px -50% 0px'
+                threshold: 1,
+                rootMargin: -headerHeight + 'px 0px 0px 0px'
             };
-            const io = new IntersectionObserver(underlineCurrentLink, options);
-            io.observe(introContent);
-            io.observe(historyContent);
-            io.observe(destinationsContent);
-        })();
-        
-        (function() {
-            const options = {
-                threshold: .8
-            };
-            const io = new IntersectionObserver(loadImg, options);
-            destinations.forEach(function(x, i) {
-                io.observe(x);
-            });
-        })();
-        
-        (function() {
-            const options = {
-                threshold: .5
-            };
-            const io = new IntersectionObserver(slideText, options);
-            destinations.forEach(function(x, i) {
-                io.observe(x);
-            });
-        })();
-    }  else {
+            io = new IntersectionObserver(changeHeader, options);
+            io.observe(h1);
+        }
+    })();
+    
+    (function() {
+        const options = {
+            rootMargin: '-50% 0px -50% 0px'
+        };
+        const io = new IntersectionObserver(underlineCurrentLink, options);
+        io.observe(introContent);
+        io.observe(historyContent);
+        io.observe(destinationsContent);
+    })();
+    
+    (function() {
+        const options = {
+            threshold: .8
+        };
+        const io = new IntersectionObserver(loadImg, options);
+        destinations.forEach(function(x, i) {
+            io.observe(x);
+        });
+    })();
+    
+    (function() {
+        const options = {
+            threshold: .5
+        };
+        const io = new IntersectionObserver(slideText, options);
+        destinations.forEach(function(x, i) {
+            io.observe(x);
+        });
+    })();
+}
+
+function addWindowOnLoadListeners() {
+    h1.classList.add('js-slide-in');
+    if (supportsObservers()) {
+        createObservers();
+    } else {
         loadAllImages();
         slideAllText();
     }
@@ -204,17 +213,13 @@ function createObservers() {
     }
     if (window.addEventListener) {
         window.addEventListener('click', autoCloseNav);
-        window.addEventListener('load', function() {
-            h1.classList.add('js-slide-in');
-            createObservers();
-        });
+        window.addEventListener('load', addWindowOnLoadListeners);
     } else {
         window.onclick = function() {
             autoCloseNav();
         }
         window.onload = function() {
-            h1.classList.add('js-slide-in');
-            createObservers();
+            addWindowOnLoadListeners();
         }
     }
     navList.addEventListener(getTransitionEndEventName(), hideNav_afterTransition);
