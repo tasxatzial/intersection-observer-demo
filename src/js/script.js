@@ -82,7 +82,6 @@ function slideAllText() {
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
-        nav.classList.remove('hidden');
         navBtn.setAttribute('aria-expanded', 'true');
         header.classList.remove('js-bg-transparent');
         header.classList.remove('box-shadow');
@@ -112,29 +111,9 @@ function autoCloseNav(e) {
     }
 }
 
-function hideNav_afterTransition() {
-    if (!mqList.matches && !header.classList.contains('js-nav-open')) {
-        nav.classList.add('hidden');
-    }
-}
-
 function closeNavOnResize() {
     if (mqList.matches) {
         closeNav();
-    }
-}
-
-function getTransitionEndEventName() {
-    let transitions = {
-        "transition"      : "transitionend",
-        "OTransition"     : "oTransitionEnd",
-        "MozTransition"   : "transitionend",
-        "WebkitTransition": "webkitTransitionEnd"
-    };
-    for (let transition in transitions) {
-        if (document.body.style[transition] !== undefined) {
-            return transitions[transition];
-        } 
     }
 }
 
@@ -222,12 +201,8 @@ function addWindowOnLoadListeners() {
             addWindowOnLoadListeners();
         }
     }
-    navList.addEventListener(getTransitionEndEventName(), hideNav_afterTransition);
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
-    }
-    if (!mqList.matches) {
-        nav.classList.add('hidden');
     }
     navBtn.addEventListener('click', toggleNav);
 })();
