@@ -144,6 +144,10 @@ p {
 
 /*===================== CONTAINER =====================*/
 
+body > * {
+    min-width: 16em;
+}
+
 .container {
     max-width: 60em;
     margin: 0 auto;
