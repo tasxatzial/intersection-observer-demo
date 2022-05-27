@@ -20,13 +20,13 @@ function changeHeader(entries, observer) {
                 header.classList.add('js-bg-transparent');
             }
             header.classList.remove('box-shadow');
-            header.classList.add('above-h1');
+            header.classList.add('js-above-h1');
         } else {
             if (!header.classList.contains('js-nav-open')) {
                 header.classList.add('box-shadow');
             }
             header.classList.remove('js-bg-transparent');
-            header.classList.remove('above-h1');
+            header.classList.remove('js-above-h1');
         }
     }
 }
@@ -88,7 +88,7 @@ function toggleNav() {
         return;
     }
     navBtn.setAttribute('aria-expanded', 'false');
-    if (header.classList.contains('above-h1')) {
+    if (header.classList.contains('js-above-h1')) {
         header.classList.add('js-bg-transparent');
         header.classList.remove('box-shadow');
     } else {
@@ -129,7 +129,7 @@ function createObservers() {
         const navList_RO = new ResizeObserver(create_h1_IO);
         navList_RO.observe(navList);
 
-        function create_h1_IO(entries) {
+        function create_h1_IO(entries, observer) {
             if (io) {
                 io.unobserve(h1);
             }
@@ -174,35 +174,24 @@ function createObservers() {
     })();
 }
 
-function addWindowOnLoadListeners() {
-    h1.classList.add('js-slide-in');
-    if (supportsObservers()) {
-        createObservers();
-    } else {
-        loadAllImages();
-        slideAllText();
-    }
-}
-
 (function() {
     if (mqList.addEventListener) {
         mqList.addEventListener('change', closeNavOnResize);
     } else {
         mqList.addListener(closeNavOnResize);
     }
-    if (window.addEventListener) {
-        window.addEventListener('click', autoCloseNav);
-        window.addEventListener('load', addWindowOnLoadListeners);
+    window.addEventListener('click', autoCloseNav);
+    if (supportsObservers()) {
+        createObservers();
     } else {
-        window.onclick = function() {
-            autoCloseNav();
-        }
-        window.onload = function() {
-            addWindowOnLoadListeners();
-        }
+        loadAllImages();
+        slideAllText();
     }
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
     }
     navBtn.addEventListener('click', toggleNav);
+    window.addEventListener('load', function() {
+        h1.classList.add('js-slide-in');
+    });
 })();
