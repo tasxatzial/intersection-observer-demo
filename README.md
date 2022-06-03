@@ -24,3 +24,7 @@ This project uses:
 ## Run locally
 
 Download the repo and open 'src/index.html' in your browser.
+
+## Screenshots
+
+See [screenshots](screenshots/).
