@@ -56,7 +56,7 @@ body {
 
 h1 {
     max-width: 90%;
-    padding: 1rem 2rem;
+    padding: 0.4em 0.8em;
     background-color: hsla(0, 0%, 0%, .5);
     border-radius: 30px;
     font-size: 2.5rem;
@@ -92,8 +92,8 @@ p {
 /*===================== IMAGE =====================*/
 
 .logo-link img {
-    max-width: 2em;
-    max-height: 2em; /* needed for older browsers */
+    max-width: 2rem;
+    max-height: 2rem; /* needed for older browsers */
     border: 1px solid black;
     border-radius: 50%;
 }
