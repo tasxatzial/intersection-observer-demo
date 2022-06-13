@@ -118,7 +118,6 @@ p {
 
 .nav-link {
     color: white;
-    font-size: 1.2rem;
     font-variant: small-caps;
     text-decoration: none;
 }
@@ -134,11 +133,12 @@ p {
 /*===================== BUTTON =====================*/
 
 .toggle-nav {
-    border: 0;
+    height: 1.47em; /* = 2.5rem */
     margin-left: auto;
-    color: white;
     background-color: transparent;
+    border: 0;
     font-size: 1.7rem;
+    color: white;
     cursor: pointer;
 }
 
@@ -153,12 +153,12 @@ body > * {
     margin: 0 auto;
 }
 
-/* needed so that we scroll exactly to start of the section */
+/* needed so that we scroll exactly to the beginning of the section */
 .intro-section,
 .history-section,
 .destinations-section {
-    padding-top: 3em;
-    margin-top: -3em;
+    padding-top: 3.5em; /* = .toggle-nav height + .header-content padding */
+    margin-top: -3.5em;
 }
 
 .intro-content,
@@ -172,8 +172,8 @@ header {
     z-index: 200;
     width: 100%;
 
-    /* needed because it is pushed up due to negative margin in intro-section */
-    margin-top: 3em;
+    /* needed because it is pushed up due to the negative margin in intro-section */
+    margin-top: 3.5em;
 
     background-color: #212121;
 }
@@ -202,6 +202,7 @@ nav {
 .nav-list {
     padding: 0;
     margin: 0;
+    font-size: 1.2rem;
     text-decoration: none;
     list-style: none;
     opacity: 0;
