@@ -12,6 +12,8 @@ const historyContent = document.querySelector('.history-content');
 const destinationsContent = document.querySelector('.destinations-content');
 const mqList = window.matchMedia("(min-width: 45em)");
 
+
+// add listeners & create initial observers
 (function() {
     if (mqList.addEventListener) {
         mqList.addEventListener('change', closeNavOnResize);
@@ -45,6 +47,12 @@ const mqList = window.matchMedia("(min-width: 45em)");
     });
 })();
 
+/**
+ * Toggles the navigation menu (open, closed). Called when:
+ * 1) The hamburger icon is clicked (toggles menu).
+ * 2) A menu item is selected (closes menu).
+ * 3) Menu is open and there's a click anywhere except the menu (closes menu).
+ */
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
@@ -62,12 +70,22 @@ function toggleNav() {
     }
 }
 
+/**
+ * Closes the navigation menu. Called when:
+ * 1) A menu item is selected.
+ * 2) There's a click anywhere except the menu.
+ * 3) The window is resized so that it matches the media query for desktops.
+ */
 function closeNav() {
     if (header.classList.contains('js-nav-open')) {
         toggleNav();
     }
 }
 
+/**
+ * Closes the navigation menu. Called when:
+ * 1) There's a click anywhere except the menu.
+ */
 function autoCloseNav(e) {
     if (header.classList.contains('js-nav-open') &&
         !header.contains(e.target)) {
@@ -75,27 +93,43 @@ function autoCloseNav(e) {
     }
 }
 
+/**
+ * Closes the navigation menu. Called when:
+ * 1) The window is resized so that it matches the media query for desktops.
+ */
 function closeNavOnResize() {
     if (mqList.matches) {
         closeNav();
     }
 }
 
+/**
+ * Returns true if intersection observer is supported, false otherwise.
+ */
 function supportsObservers() {
     return 'IntersectionObserver' in window &&
            'IntersectionObserverEntry' in window &&
            'isIntersecting' in window.IntersectionObserverEntry.prototype;
 }
 
+/**
+ * Creates intersection & resize observers for the h1 element (text in the
+ * landing section).
+ * 
+ * The intersection observer is used for controlling the background color of the
+ * navigation menu.
+ * 
+ * The resize observer is used for detecting when the height of the navigation menu
+ * changes. If that's the case, it re-creates the intersection observer.
+ */
 function createH1Observers() {
-    /* we need a resize observer because when the root font size changes, the
-    header height changes as well. Therefore the header will now intersect h1
-    sooner and we need a new intersection observer for h1 */
-
     let io = null;
     const navList_RO = new ResizeObserver(create_h1_IO);
     navList_RO.observe(navList);
 
+    /**
+     * Resize observer callback
+     */
     function create_h1_IO(entries, observer) {
         if (io) {
             io.unobserve(h1);
@@ -109,6 +143,9 @@ function createH1Observers() {
         io.observe(h1);
     }
 
+    /**
+     * Intersection observer callback
+     */
     function changeHeader(entries, observer) {
         for (let i = 0; i < entries.length; i++) {
             if (entries[i].isIntersecting) {
@@ -128,6 +165,10 @@ function createH1Observers() {
     }
 }
 
+/**
+ * Creates an intersection observer for each of the top-level sections. These observers
+ * are used for controlling the highlighted menu item.
+ */
 function createSectionObservers() {
     const options = {
         rootMargin: '-50% 0px -50% 0px'
@@ -152,6 +193,10 @@ function createSectionObservers() {
     }
 }
 
+/**
+ * Creates an intersection observer for each of the destinations. These observers
+ * are used for controlling the slide-in of the text in each destination.
+ */
 function createDestinationInfoObservers() {
     const options = {
         threshold: .5
@@ -172,6 +217,10 @@ function createDestinationInfoObservers() {
     }
 }
 
+/**
+ * Creates an intersection observer for each of the destinations. These observers
+ * are used for controlling the loading of the image in each destination.
+ */
 function createDestinationPhotoObservers() {
     const options = {
         threshold: .8
