@@ -3,6 +3,9 @@
 }
 
 html {
+    --nav-button-height: 2.5rem;
+    --header-padding: .5rem;
+    --offset: calc(var(--nav-button-height) + 2 * var(--header-padding));
     scroll-behavior: smooth;
 }
 
@@ -133,11 +136,11 @@ p {
 /*===================== BUTTON =====================*/
 
 .toggle-nav {
-    height: 1.47em; /* = 2.5rem */
+    height: var(--nav-button-height);
     margin-left: auto;
     background-color: transparent;
     border: 0;
-    font-size: 1.7rem;
+    font-size: calc(var(--nav-button-height) * 0.7);
     color: white;
     cursor: pointer;
 }
@@ -153,12 +156,12 @@ body > * {
     margin: 0 auto;
 }
 
-/* needed so that we scroll exactly to the beginning of the section */
+/* needed so that we scroll exactly to the start of each section */
 .intro-section,
 .history-section,
 .destinations-section {
-    padding-top: 3.5em; /* = .toggle-nav height + .header-content padding */
-    margin-top: -3.5em;
+    padding-top: var(--offset);
+    margin-top: calc(-1 * var(--offset));
 }
 
 .intro-content,
@@ -171,10 +174,7 @@ header {
     position: fixed;
     z-index: 200;
     width: 100%;
-
-    /* needed because it is pushed up due to the negative margin in intro-section */
-    margin-top: 3.5em;
-
+    margin-top: var(--offset);
     background-color: #212121;
 }
 
@@ -182,7 +182,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.5em 1em;
+    padding: var(--header-padding) 1em;
 }
 
 nav {
@@ -213,9 +213,8 @@ nav {
     margin-bottom: 1.5em;
 }
 
-/* needs to appear on top of history section so that it overlaps the
-extra space created by the negative,positive padding,margin combo in
-the history section */
+/* must appear above history section so that it hides the
+extra space created by the padding,margin in that section */
 .intro-section {
     position: relative;
     z-index: 100;
@@ -231,10 +230,9 @@ the history section */
     height: 100vh;   
 }
 
-/* needs to be stacked above destinations section so that it overlaps the
-extra space created by the negative,positive padding,margin combo in
-the destinations section.
-It also needs to be stacked under intro section, see the relevant comment there */
+/* must appear above destinations section so that it hides the
+extra space created by the padding,margin in that section.
+Also, it must appear under intro section */
 .history-section {
     position: relative;
     z-index: 99;
@@ -245,8 +243,8 @@ It also needs to be stacked under intro section, see the relevant comment there 
     margin-bottom: 1.5em;
 }
 
-/* needs to be stacked under history section so the extra space created by
-the negative,positive padding,margin combo is overlaped by the history section */
+/* must appear under history section so the extra space created by its
+padding,margin is hidden by that section */
 .destinations-section {
     position: relative;
     z-index: 98;
@@ -271,6 +269,11 @@ the negative,positive padding,margin combo is overlaped by the history section *
 /*************************************** HIGH RES ***************************************/
 
 @media screen and (min-width: 45em) {
+
+    html {
+        --nav-button-height: 2rem; /* note: button is hidden */
+        --header-padding: 1rem;
+    }
 
     /*===================== JS =====================*/
 
@@ -301,11 +304,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
 
     /*===================== CONTAINER =====================*/
 
-    /* needed because it is pushed up due to negative margin in intro-section */
-    header {
-        margin-top: 4em;
-    }
-
     nav {
         visibility: visible;
         position: static;
@@ -329,18 +327,6 @@ the negative,positive padding,margin combo is overlaped by the history section *
         background-image: url(../img/nasa_1702.jpg);
     }
 
-    /* needed so that we scroll exactly to start of the section */
-    .intro-section,
-    .history-section,
-    .destinations-section {
-        padding-top: 4em;
-        margin-top: -4em;
-    }
-
-    .header-content {
-        padding: 1em 2em 1em;
-    }
-    
     .intro-content,
     .history-content,
     .destinations-content {
