@@ -148,11 +148,11 @@ p {
 /*===================== CONTAINER =====================*/
 
 body > * {
-    min-width: 16em;
+    min-width: 16rem;
 }
 
 .container {
-    max-width: 60em;
+    max-width: 60rem;
     margin: 0 auto;
 }
 
