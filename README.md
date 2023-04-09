@@ -2,8 +2,6 @@
 
 A simple website that illustrates the application of Intersection and Resize observers.
 
-This is a frontend project. See the live version [here](https://tasxatzial.github.io/space-destinations-website).
-
 ## Implementation
 
 * Responsive (flexbox).
@@ -20,6 +18,8 @@ This is a frontend project. See the live version [here](https://tasxatzial.githu
 * Hamburger menu for mobile.
 
 ## Dependencies
+
+External:
 
 * [:focus-visible](https://github.com/WICG/focus-visible) polyfill.
 
