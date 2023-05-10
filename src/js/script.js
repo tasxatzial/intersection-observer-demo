@@ -3,7 +3,7 @@ const h1 = document.querySelector('h1');
 const nav = document.querySelector('nav');
 const navList = nav.querySelector('.nav-list');
 const navLinks = nav.querySelectorAll('.nav-link');
-const navBtn = header.querySelector('.toggle-nav');
+const toggleNavBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const destinationPhotos = document.querySelectorAll('.destination-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
@@ -11,14 +11,14 @@ const introContent = document.querySelector('.intro-content');
 const historyContent = document.querySelector('.history-content');
 const destinationsContent = document.querySelector('.destinations-content');
 const mqList = window.matchMedia("(min-width: 45em)");
-
+let navShouldBeOpen = false;
 
 // add listeners & create initial observers
 (function() {
     if (mqList.addEventListener) {
-        mqList.addEventListener('change', closeNavOnResize);
+        mqList.addEventListener('change', toggleNavOnResize);
     } else {
-        mqList.addListener(closeNavOnResize);
+        mqList.addListener(toggleNavOnResize);
     }
     window.addEventListener('click', autoCloseNav);
     if (supportsObservers()) {
@@ -41,65 +41,65 @@ const mqList = window.matchMedia("(min-width: 45em)");
     for (let i = 0; i < navLinks.length; i++) {
         navLinks[i].addEventListener('click', closeNav);
     }
-    navBtn.addEventListener('click', toggleNav);
+    toggleNavBtn.addEventListener('click', toggleNav);
     window.addEventListener('load', function() {
         h1.classList.add('js-slide-in');
     });
 })();
 
-/**
- * Toggles the navigation menu (open, closed). Called when:
- * 1) The hamburger icon is clicked (toggles menu).
- * 2) A menu item is selected (closes menu).
- * 3) Menu is open and there's a click anywhere except the menu (closes menu).
- */
 function toggleNav() {
     header.classList.toggle('js-nav-open');
     if (header.classList.contains('js-nav-open')) {
-        navBtn.setAttribute('aria-expanded', 'true');
-        header.classList.remove('js-bg-transparent');
-        header.classList.remove('box-shadow');
-        return;
+        openNav();
+    } else {
+        closeNav();
     }
-    navBtn.setAttribute('aria-expanded', 'false');
+}
+
+function openNav() {
+    header.classList.add('js-nav-open');
+    toggleNavBtn.setAttribute('aria-expanded', 'true');
+    header.classList.remove('js-bg-transparent');
+    header.classList.remove('box-shadow');
+}
+
+function closeNav() {
+    header.classList.remove('js-nav-open');
+    toggleNavBtn.setAttribute('aria-expanded', 'false');
     if (header.classList.contains('js-above-h1')) {
         header.classList.add('js-bg-transparent');
         header.classList.remove('box-shadow');
     } else {
         header.classList.add('box-shadow');
     }
+    navShouldBeOpen = false;
 }
 
 /**
- * Closes the navigation menu. Called when:
- * 1) A menu item is selected.
- * 2) There's a click anywhere except the menu.
- * 3) The window is resized so that it matches the media query for desktops.
- */
-function closeNav() {
-    if (header.classList.contains('js-nav-open')) {
-        toggleNav();
-    }
-}
-
-/**
- * Closes the navigation menu. Called when:
- * 1) There's a click anywhere except the menu.
+ * Called when there's a click anywhere on the window.
+ * The menu will close only if the click happens outside the menu & header.
  */
 function autoCloseNav(e) {
-    if (header.classList.contains('js-nav-open') &&
-        !header.contains(e.target)) {
-            toggleNav();
+    if (header.classList.contains('js-nav-open') && !header.contains(e.target)) {
+        closeNav();
     }
 }
 
 /**
- * Closes the navigation menu. Called when:
- * 1) The window is resized so that it matches the media query for desktops.
+ * Toggles the navigation menu when the window is resized so that it matches
+ * the media query for desktops. More specifically:
+ * 1) It opens the menu if it was open when the window was resized for desktop and now it
+ *    is resized for mobile.
+ * 2) It closes the menu if the window is resized for desktop.
  */
-function closeNavOnResize() {
-    if (mqList.matches) {
+function toggleNavOnResize() {
+    if (mqList.matches && header.classList.contains('js-nav-open')) {
         closeNav();
+        navShouldBeOpen = true;
+        return;
+    }
+    if (navShouldBeOpen) {
+        openNav();
     }
 }
 
