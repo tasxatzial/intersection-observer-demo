@@ -308,16 +308,16 @@ padding,margin is hidden by that section */
 
     nav {
         visibility: visible;
-        position: static;
+        position: initial;
         padding: 0;
         margin-right: auto;
         background-color: inherit;
-        transform: scale(1);
+        transform: scaleY(1);
+        transition: transform 0s;
     }
 
     .nav-list {
         display: flex;
-        visibility: visible;
         opacity: 1;
     }
 
