@@ -1,3 +1,5 @@
+'use strict';
+
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
 const nav = document.querySelector('nav');
