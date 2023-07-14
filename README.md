@@ -25,7 +25,7 @@ External:
 
 ## Run locally
 
-Download the repo and open 'src/index.html' in the browser.
+Download the 'src' folder and open 'index.html' in the browser.
 
 ## Screenshots
 
