@@ -1,4 +1,4 @@
-# Space destinations website
+# Intersection observer demo
 
 A simple website that illustrates the application of Intersection and Resize observers.
 
