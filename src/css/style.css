@@ -157,7 +157,9 @@ p {
 
 /*===================== CONTAINER =====================*/
 
-body > * {
+body > header,
+body > section,
+body > main {
     min-width: 16rem;
 }
 
@@ -249,8 +251,8 @@ Also, it must appear under intro section */
     background-color: ghostwhite;
 }
 
-.history-content > * + * {
-    margin-bottom: 1.5em;
+.history-event {
+    margin-bottom: 2em;
 }
 
 /* must appear under history section so the extra space created by its
@@ -351,7 +353,8 @@ padding,margin is hidden by that section */
         flex-direction: row;
     }
 
-    .destination > * {
+    .destination > .destination-body,
+    .destination > .destination-img-container {
         max-width: 45%;
     }
 
