@@ -40,24 +40,24 @@ body {
     }
 }
 
-.destination-img.js-loaded-img {
+.js-loaded-img.destination-img {
     transform: scale(1);
 }
 
-.js-nav-open nav {
+.js-nav-open .nav-list {
     visibility: visible;
     transform: scaleY(1);
-    transition-delay: 0s;
+    transition: transform 300ms;
 }
 
-.js-nav-open .nav-list {
-    opacity:  1;
-    transition: opacity 150ms 150ms;
+.js-nav-open .nav-link {
+    opacity: 1;
+    transition: opacity 200ms ease-in 100ms;  
 }
 
 .js-bg-transparent {
     background-color: transparent;
-    transition: background-color 300ms 300ms;
+    transition: background-color 300ms ease-in-out 300ms;
 }
 
 .js-slide-in {
@@ -131,8 +131,11 @@ p {
 
 .nav-link {
     color: white;
+    font-size: 1.2rem;
     font-variant: small-caps;
     text-decoration: none;
+    opacity: 0;
+    transition: opacity 100ms ease-out;
 }
 
 .nav-link:hover {
@@ -197,28 +200,23 @@ header {
     padding: var(--header-padding) 1em;
 }
 
-nav {
+.nav-list {
+    display: flex;
+    flex-direction: column;
     visibility: hidden;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
+    padding: 0;
+    margin: 0;
     padding: 1em 1em 0;
     background-color: #212121;
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 300ms ease-out,
-                visibility 0s 300ms;
-}
-
-.nav-list {
-    padding: 0;
-    margin: 0;
-    font-size: 1.2rem;
-    text-decoration: none;
+                visibility 300ms;
     list-style: none;
-    opacity: 0;
-    transition: opacity 100ms;
 }
 
 .nav-item {
@@ -314,21 +312,25 @@ padding,margin is hidden by that section */
         display: none;
     }
 
+    /*===================== LINK =====================*/
+
+    .nav-link {
+        opacity: 1;
+    }
+
     /*===================== CONTAINER =====================*/
 
-    nav {
-        visibility: visible;
-        position: initial;
-        padding: 0;
-        margin-right: auto;
-        background-color: inherit;
-        transform: scaleY(1);
-        transition: transform 0s;
+    .header-content {
+        justify-content: flex-start;
     }
 
     .nav-list {
-        display: flex;
-        opacity: 1;
+        flex-direction: row;
+        visibility: visible;
+        position: initial;
+        padding: 0;
+        background-color: transparent;
+        transform: scaleY(1);
     }
 
     .nav-item {
