@@ -68,10 +68,11 @@ body {
 /*===================== TEXT =====================*/
 
 h1 {
+    position: relative;
     max-width: 90%;
     padding: 0.4em 0.8em;
-    background-color: hsla(0, 0%, 0%, .5);
-    border-radius: 30px;
+    background-color: hsla(0, 0%, 0%, .85);
+    border-radius: 0.5em;
     font-size: 2.5rem;
     text-align: center;
     color: white;
@@ -83,6 +84,17 @@ h1 {
 
 h1 span {
     color: mediumaquamarine;
+}
+
+h1::after {
+    position: absolute;
+    width: 4rem;
+    height: 5rem;
+    top: 100%;
+    right: 10%;
+    content: '';
+    clip-path: polygon(0 0, 100% 80%, 100% 0);
+    background-color: hsla(0, 0%, 0%, .85);
 }
 
 h2 {
