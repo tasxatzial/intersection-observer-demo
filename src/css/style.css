@@ -175,7 +175,7 @@ p {
 body > header,
 body > section,
 body > main {
-    min-width: 16rem;
+    min-width: 15rem;
 }
 
 .container {
