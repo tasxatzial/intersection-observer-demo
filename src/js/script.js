@@ -5,7 +5,7 @@ const h1 = document.querySelector('h1');
 const nav = document.querySelector('nav');
 const navList = nav.querySelector('.nav-list');
 const navLinks = nav.querySelectorAll('.nav-link');
-const toggleNavBtn = nav.querySelector('.toggle-nav');
+const toggleNavBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const destinationPhotos = document.querySelectorAll('.destination-img');
 const destinationBodies = document.querySelectorAll('.destination-body');
@@ -14,6 +14,7 @@ const historyContent = document.querySelector('.history-content');
 const destinationsContent = document.querySelector('.destinations-content');
 const mqList = window.matchMedia("(min-width: 45em)");
 let navShouldBeOpen = false;
+const H1TransitionEndHandler = H1OnTransitionEnd(2); //h1 has two transitions
 
 // add listeners & create initial observers
 (function() {
@@ -24,7 +25,6 @@ let navShouldBeOpen = false;
     }
     window.addEventListener('click', autoCloseNav);
     if (supportsObservers()) {
-        createH1Observers();
         createSectionObservers();
         createDestinationInfoObservers();
         createDestinationPhotoObservers();
@@ -46,8 +46,27 @@ let navShouldBeOpen = false;
     toggleNavBtn.addEventListener('click', toggleNav);
     window.addEventListener('load', function() {
         h1.classList.add('js-slide-in');
+        if (supportsObservers()) {
+            /* There's a flashing of the header when the page loads.
+            This happends due to the transitions of the h1 which triggers its
+            intersection observer multiple times. To solve this, we wait until
+            all h1 transitions end, then we add its observers */
+            h1.addEventListener('transitionend', H1TransitionEndHandler);
+        }
     });
 })();
+
+function H1OnTransitionEnd(totalCallCount) {
+    let callCount = 0;
+    return function() {
+        callCount++;
+        if (callCount !== totalCallCount) {
+            return;
+        }
+        createH1Observers();
+        h1.removeEventListener('transitionend', H1TransitionEndHandler);
+    }
+}
 
 function toggleNav() {
     header.classList.toggle('js-nav-open');
