@@ -107,11 +107,9 @@ function autoCloseNav(e) {
 }
 
 /**
- * Toggles the navigation menu when the window is resized so that it matches
- * the media query for desktops. More specifically:
- * 1) It opens the menu if it was open when the window was resized for desktop and now it
- *    is resized for mobile.
- * 2) It closes the menu if the window is resized for desktop.
+ * When the mobile menu is open and the window width becomes > than the
+ * breakpoint for desktops, the menu should close. However, we need to restore
+ * its state when the window width becomes < than the breakpoint for desktops.
  */
 function toggleNavOnResize() {
     if (mqList.matches && header.classList.contains('js-nav-open')) {
