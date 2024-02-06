@@ -2,9 +2,8 @@
 
 const header = document.querySelector('header');
 const h1 = document.querySelector('h1');
-const nav = document.querySelector('nav');
-const navList = nav.querySelector('.nav-list');
-const navLinks = nav.querySelectorAll('.nav-link');
+const navList = header.querySelector('.nav-list');
+const navLinks = header.querySelectorAll('.nav-link');
 const toggleNavBtn = header.querySelector('.toggle-nav');
 const destinations = document.querySelectorAll('.destination');
 const destinationPhotos = document.querySelectorAll('.destination-img');
