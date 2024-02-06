@@ -46,15 +46,21 @@ const H1TransitionEndHandler = H1OnTransitionEnd(2); //h1 has two transitions
     window.addEventListener('load', function() {
         h1.classList.add('js-slide-in');
         if (supportsObservers()) {
-            /* There's a flashing of the header when the page loads.
-            This happends due to the transitions of the h1 which triggers its
-            intersection observer multiple times. To solve this, we wait until
-            all h1 transitions end, then we add its observers */
             h1.addEventListener('transitionend', H1TransitionEndHandler);
         }
     });
 })();
 
+
+/* If we add the h1 observers without waiting for the h1 to finish its slide-in
+transition, the header's background will flash when the page loads. This happens
+because the background color changes based on the position of h1, requiring the h1
+intersection observer to be called multiple times during the slide-in transition.
+To address this, we wait until all h1 transitions have ended before adding its
+observers. This is achieved by calling this function on the 'transitionend'
+event. The observers are added only after the event has occurred totalCallCount
+times, after which the listener is permanently removed from h1.
+This is a closure, it keeps track of how many times it has been called. */
 function H1OnTransitionEnd(totalCallCount) {
     let callCount = 0;
     return function() {
