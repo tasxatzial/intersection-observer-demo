@@ -6,7 +6,7 @@ A simple website that illustrates the application of Intersection and Resize obs
 
 * Responsive.
 * Accessible + screen reader friendly.
-* Mobile first design.
+* Mobile first approach.
 * Animations are reduced for users who have turned them off.
 * Observers:
   * Lazy loading of images.
