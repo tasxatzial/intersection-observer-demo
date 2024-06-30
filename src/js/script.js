@@ -13,7 +13,6 @@ const historyContent = document.querySelector('.history-content');
 const destinationsContent = document.querySelector('.destinations-content');
 const mqList = window.matchMedia("(min-width: 45em)");
 let navShouldBeOpen = false;
-const H1TransitionEndHandler = H1OnTransitionEnd(2); //h1 has two transitions
 
 // add listeners & create initial observers
 (function() {
@@ -43,35 +42,25 @@ const H1TransitionEndHandler = H1OnTransitionEnd(2); //h1 has two transitions
         navLinks[i].addEventListener('click', closeNav);
     }
     toggleNavBtn.addEventListener('click', toggleNav);
-    window.addEventListener('load', function() {
+
+    /* If we add the h1 observers without waiting for the h1 to finish its slide-in
+    transition, the header's background will flash when the page loads. This happens
+    because the background color changes based on the position of h1, requiring the h1
+    intersection observer to be called multiple times during the slide-in transition.
+    To address this, we wait until all h1 transitions have ended before adding its
+    observers.*/
+    const h1TransitionEndPromise = new Promise(resolve => {
+        h1.addEventListener('transitionend', resolve, {once: true})
+    });
+    window.addEventListener('load', async () => {
         h1.classList.add('js-slide-in');
         if (supportsObservers()) {
-            h1.addEventListener('transitionend', H1TransitionEndHandler);
+            await h1TransitionEndPromise;
+            createH1Observers();
         }
     });
 })();
 
-
-/* If we add the h1 observers without waiting for the h1 to finish its slide-in
-transition, the header's background will flash when the page loads. This happens
-because the background color changes based on the position of h1, requiring the h1
-intersection observer to be called multiple times during the slide-in transition.
-To address this, we wait until all h1 transitions have ended before adding its
-observers. This is achieved by calling this function on the 'transitionend'
-event. The observers are added only after the event has occurred totalCallCount
-times, after which the listener is permanently removed from h1.
-This is a closure, it keeps track of how many times it has been called. */
-function H1OnTransitionEnd(totalCallCount) {
-    let callCount = 0;
-    return function() {
-        callCount++;
-        if (callCount !== totalCallCount) {
-            return;
-        }
-        createH1Observers();
-        h1.removeEventListener('transitionend', H1TransitionEndHandler);
-    }
-}
 
 function toggleNav() {
     header.classList.toggle('js-nav-open');
