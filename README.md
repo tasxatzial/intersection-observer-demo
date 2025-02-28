@@ -2,6 +2,8 @@
 
 A simple website that illustrates the application of Intersection and Resize observers.
 
+[Live version](https://tasxatzial.github.io/intersection-observer-demo/src/index.html)
+
 ## Implementation
 
 * Responsive.
